@@ -4,156 +4,157 @@ import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ChevronDown, Mail, Phone, MapPin } from 'lucide-react'
+import Image from 'next/image'
 
 const productCategories = [
   {
     title: 'Protective Wear',
     items: [
-      { name: 'Ordinary Worksuit', description: 'All sizes and colors available' },
-      { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available' },
-      { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available' }
+      { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit.jpg' },
+      { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/acid-proof-worksuit.jpg' },
+      { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/fire-proof-worksuit.jpg' }
     ]
   },
   {
     title: 'Dust Coats',
     items: [
-      { name: 'Dust Coat', description: 'Professional dust coats for various industries' },
-      { name: 'Lab Coat', description: 'Standard and premium lab coats' }
+      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat.jpg' },
+      { name: 'Lab Coat', description: 'Standard and premium lab coats', image: '/products/lab-coat.jpg' }
     ]
   },
   {
     title: 'Head Gear',
     items: [
-      { name: 'Helmets', description: 'Safety helmets for construction and industry' },
-      { name: 'Baseball Cap', description: 'Custom branded baseball caps' },
-      { name: 'Sun Hat', description: 'Protective sun hats' }
+      { name: 'Helmets', description: 'Safety helmets for construction and industry', image: '/products/helmet.jpg' },
+      { name: 'Baseball Cap', description: 'Custom branded baseball caps', image: '/products/baseball-cap.jpg' },
+      { name: 'Sun Hat', description: 'Protective sun hats', image: '/products/sun-hat.jpg' }
     ]
   },
   {
     title: 'Protective Gloves',
     items: [
-      { name: 'Cleaning Gloves', description: 'Durable cleaning gloves' },
-      { name: 'Sports Gloves', description: 'Athletic and sports gloves' },
-      { name: 'Construction Gloves', description: 'Heavy-duty construction gloves' }
+      { name: 'Cleaning Gloves', description: 'Durable cleaning gloves', image: '/products/cleaning-gloves.jpg' },
+      { name: 'Sports Gloves', description: 'Athletic and sports gloves', image: '/products/sports-gloves.jpg' },
+      { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction-gloves.jpg' }
     ]
   },
   {
     title: 'Goggles',
     items: [
-      { name: 'Welding Goggles', description: 'Professional welding protection' },
-      { name: 'UV Goggles', description: 'UV protection goggles' },
-      { name: 'Protective Goggles', description: 'General protective eyewear' }
+      { name: 'Welding Goggles', description: 'Professional welding protection', image: '/products/welding-goggles.jpg' },
+      { name: 'UV Goggles', description: 'UV protection goggles', image: '/products/uv-goggles.jpg' },
+      { name: 'Protective Goggles', description: 'General protective eyewear', image: '/products/protective-goggles.jpg' }
     ]
   },
   {
     title: 'Safety Shoes',
     items: [
-      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear' },
-      { name: 'High Cut Safety Boots', description: 'High-cut protective boots' },
-      { name: 'Safety Shoe', description: 'Standard safety shoes' }
+      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low-cut-safety-shoe.jpg' },
+      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/high-cut-safety-boots.jpg' },
+      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety-shoe.jpg' }
     ]
   },
   {
     title: 'Ladies Formal Wear',
     items: [
-      { name: "Women's Formal Suit", description: 'Professional business suits' },
-      { name: "Women's Formal Pants", description: 'Elegant formal trousers' },
-      { name: "Women's Wear", description: 'Complete women\'s formal collection' }
+      { name: "Women's Formal Suit", description: 'Professional business suits', image: '/products/womens-formal-suit.jpg' },
+      { name: "Women's Formal Pants", description: 'Elegant formal trousers', image: '/products/womens-formal-pants.jpg' },
+      { name: "Women's Wear", description: 'Complete women\'s formal collection', image: '/products/womens-wear.jpg' }
     ]
   },
   {
     title: 'T-Shirts',
     items: [
-      { name: 'Round Neck T-Shirt', description: 'Classic round neck design' },
-      { name: 'V Neck T-Shirt', description: 'Stylish V-neck t-shirts' },
-      { name: 'T-Shirt', description: 'Custom promotional t-shirts' }
+      { name: 'Round Neck T-Shirt', description: 'Classic round neck design', image: '/products/round-neck-tshirt.jpg' },
+      { name: 'V Neck T-Shirt', description: 'Stylish V-neck t-shirts', image: '/products/v-neck-tshirt.jpg' },
+      { name: 'T-Shirt', description: 'Custom promotional t-shirts', image: '/products/tshirt.jpg' }
     ]
   },
   {
     title: 'School Wear',
     items: [
-      { name: "Boys Uniform", description: 'Complete boys school uniforms' },
-      { name: "Girl's Uniform", description: 'Complete girls school uniforms' },
-      { name: "Tunic & Boys Shorts", description: 'School tunics and shorts' }
+      { name: "Boys Uniform", description: 'Complete boys school uniforms', image: '/products/boys-uniform.jpg' },
+      { name: "Girl's Uniform", description: 'Complete girls school uniforms', image: '/products/girls-uniform.jpg' },
+      { name: "Tunic & Boys Shorts", description: 'School tunics and shorts', image: '/products/tunic-boys-shorts.jpg' }
     ]
   },
   {
     title: 'Reflective Vests & Jackets',
     items: [
-      { name: 'Reflective Half Jacket', description: 'High-visibility half jackets' },
-      { name: "Miner's Reflective Jacket", description: 'Mining industry reflective wear' },
-      { name: 'Work Reflective Jacket', description: 'General work reflective jackets' }
+      { name: 'Reflective Half Jacket', description: 'High-visibility half jackets', image: '/products/reflective-half-jacket.jpg' },
+      { name: "Miner's Reflective Jacket", description: 'Mining industry reflective wear', image: '/products/miners-reflective-jacket.jpg' },
+      { name: 'Work Reflective Jacket', description: 'General work reflective jackets', image: '/products/work-reflective-jacket.jpg' }
     ]
   },
   {
     title: 'Safari Wear',
     items: [
-      { name: 'Safari Shirt', description: 'Classic safari shirts' },
-      { name: 'Safari Multi Pocket Half Jacket', description: 'Functional safari jackets' },
-      { name: 'Safari Shorts', description: 'Durable safari shorts' }
+      { name: 'Safari Shirt', description: 'Classic safari shirts', image: '/products/safari-shirt.jpg' },
+      { name: 'Safari Multi Pocket Half Jacket', description: 'Functional safari jackets', image: '/products/safari-multi-pocket-jacket.jpg' },
+      { name: 'Safari Shorts', description: 'Durable safari shorts', image: '/products/safari-shorts.jpg' }
     ]
   },
   {
     title: 'Golf T-Shirts',
     items: [
-      { name: 'Golf T-Shirt', description: 'Classic golf shirts' },
-      { name: 'Slim Fit Golf T-Shirt', description: 'Modern slim-fit golf shirts' }
+      { name: 'Golf T-Shirt', description: 'Classic golf shirts', image: '/products/golf-tshirt.jpg' },
+      { name: 'Slim Fit Golf T-Shirt', description: 'Modern slim-fit golf shirts', image: '/products/slim-fit-golf-tshirt.jpg' }
     ]
   },
   {
     title: "Chef's Uniform",
     items: [
-      { name: 'Chefs Top Wear', description: 'Professional chef jackets' },
-      { name: 'Chefs Apron', description: 'Durable chef aprons' },
-      { name: 'Chefs Pants', description: 'Comfortable chef pants' }
+      { name: 'Chefs Top Wear', description: 'Professional chef jackets', image: '/products/chefs-top.jpg' },
+      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron.jpg' },
+      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants.jpg' }
     ]
   },
   {
     title: 'Gumboots & Rubber Boots',
     items: [
-      { name: 'Gumboots', description: 'Standard gumboots' },
-      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots' }
+      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots.jpg' },
+      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gumboots-low-cut.jpg' }
     ]
   },
   {
     title: 'Formal Wear',
     items: [
-      { name: 'Short Sleeved Shirt', description: 'Formal short-sleeved shirts' },
-      { name: 'Long Sleeve Shirt', description: 'Formal long-sleeved shirts' },
-      { name: 'Ladies Blouse', description: 'Professional ladies blouses' }
+      { name: 'Short Sleeved Shirt', description: 'Formal short-sleeved shirts', image: '/products/short-sleeved-shirt.jpg' },
+      { name: 'Long Sleeve Shirt', description: 'Formal long-sleeved shirts', image: '/products/long-sleeve-shirt.jpg' },
+      { name: 'Ladies Blouse', description: 'Professional ladies blouses', image: '/products/ladies-blouse.jpg' }
     ]
   },
   {
     title: 'Security Uniform',
     items: [
-      { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts' },
-      { name: "Security's Pants", description: 'Durable security pants' },
-      { name: "Security's Jacket", description: 'Security jackets' }
+      { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts', image: '/products/security-long-sleeved-shirt.jpg' },
+      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants.jpg' },
+      { name: "Security's Jacket", description: 'Security jackets', image: '/products/security-jacket.jpg' }
     ]
   },
   {
     title: "Security's Accessories",
     items: [
-      { name: 'Hand Cuffs', description: 'Professional handcuffs' },
-      { name: 'Sun Glasses', description: 'Security sunglasses' },
-      { name: 'Button Stick', description: 'Security batons' }
+      { name: 'Hand Cuffs', description: 'Professional handcuffs', image: '/products/handcuffs.jpg' },
+      { name: 'Sun Glasses', description: 'Security sunglasses', image: '/products/sunglasses.jpg' },
+      { name: 'Button Stick', description: 'Security batons', image: '/products/button-stick.jpg' }
     ]
   },
   {
     title: 'Hospital Wear',
     items: [
-      { name: "Nurse's Top Wear", description: 'Professional nursing tops' },
-      { name: "Nurse's Pants", description: 'Comfortable nursing pants' },
-      { name: 'Theatre Gown', description: 'Surgical theatre gowns' }
+      { name: "Nurse's Top Wear", description: 'Professional nursing tops', image: '/products/nurses-top.jpg' },
+      { name: "Nurse's Pants", description: 'Comfortable nursing pants', image: '/products/nurses-pants.jpg' },
+      { name: 'Theatre Gown', description: 'Surgical theatre gowns', image: '/products/theatre-gown.jpg' }
     ]
   },
   {
     title: 'Branding & Banners',
     items: [
-      { name: 'Custom Branding', description: 'Professional branding services' },
-      { name: 'Promotional Gifts', description: 'Custom promotional items' },
-      { name: 'Banners', description: 'Custom banners and signage' },
-      { name: 'Tear Drop Banner', description: 'Eye-catching tear drop banners' }
+      { name: 'Custom Branding', description: 'Professional branding services', image: '/products/custom-branding.jpg' },
+      { name: 'Promotional Gifts', description: 'Custom promotional items', image: '/products/promotional-gifts.jpg' },
+      { name: 'Banners', description: 'Custom banners and signage', image: '/products/banners.jpg' },
+      { name: 'Tear Drop Banner', description: 'Eye-catching tear drop banners', image: '/products/teardrop-banner.jpg' }
     ]
   }
 ]
@@ -227,7 +228,7 @@ export default function Page() {
   const parallaxOffset = scrollY * 0.5
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -251,7 +252,7 @@ export default function Page() {
       {/* Hero Section with Parallax */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background"
+          className="absolute inset-0 bg-gradient-to-b from-blue-100/40 via-purple-100/30 to-transparent"
           style={{ transform: `translateY(${parallaxOffset}px)` }}
         />
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
@@ -277,7 +278,7 @@ export default function Page() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-32 px-6 bg-muted/30">
+      <section id="about" className="py-32 px-6 bg-gradient-to-b from-transparent via-indigo-50/20 to-transparent">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -312,7 +313,7 @@ export default function Page() {
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-32 px-6">
+      <section id="products" className="py-32 px-6 bg-gradient-to-b from-transparent via-violet-50/20 to-transparent">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-6 text-balance">
@@ -333,14 +334,23 @@ export default function Page() {
                     </h3>
                     <div className="h-1 w-20 bg-primary rounded-full" />
                   </div>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                     {category.items.map((item, itemIndex) => (
                       <Card 
                         key={item.name}
-                        className="group p-6 bg-card border-border hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                        className="group break-inside-avoid bg-card border-border hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden"
                         style={{ transitionDelay: `${itemIndex * 50}ms` }}
                       >
-                        <div className="space-y-3">
+                        <div className="relative aspect-square w-full overflow-hidden bg-muted">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                        </div>
+                        <div className="p-6 space-y-3">
                           <h4 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors">
                             {item.name}
                           </h4>
@@ -359,29 +369,31 @@ export default function Page() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6 bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto text-center">
-          <AnimatedSection>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-balance">
-              Ready to elevate your brand?
-            </h2>
-            <p className="text-lg mb-10 opacity-90 text-balance leading-relaxed">
-              Get in touch with our team to discuss your custom uniform and promotional wear needs.
-            </p>
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="rounded-full px-8 h-12 text-base"
-              asChild
-            >
-              <a href="#contact">Contact Us Today</a>
-            </Button>
-          </AnimatedSection>
+      <section className="py-32 px-6 bg-gradient-to-b from-transparent via-rose-50/20 to-transparent">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-primary text-primary-foreground rounded-3xl p-16 text-center">
+            <AnimatedSection>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-balance">
+                Ready to elevate your brand?
+              </h2>
+              <p className="text-lg mb-10 opacity-90 text-balance leading-relaxed">
+                Get in touch with our team to discuss your custom uniform and promotional wear needs.
+              </p>
+              <Button 
+                size="lg" 
+                variant="secondary"
+                className="rounded-full px-8 h-12 text-base"
+                asChild
+              >
+                <a href="#contact">Contact Us Today</a>
+              </Button>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 px-6">
+      <section id="contact" className="py-32 px-6 bg-gradient-to-b from-transparent via-amber-50/20 to-transparent">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6">
@@ -439,7 +451,7 @@ export default function Page() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
+      <footer className="py-12 px-6 border-t border-border bg-background/80">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Cyclenet Supplies. Crafting quality since 2012.
