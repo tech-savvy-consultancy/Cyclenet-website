@@ -231,7 +231,7 @@ export default function Page() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border">
-        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="text-2xl font-semibold tracking-tight text-foreground">
             CYCLENET
           </div>
@@ -278,32 +278,32 @@ export default function Page() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-32 px-6 bg-gradient-to-b from-transparent via-indigo-50/20 to-transparent">
+      <section id="about" className="py-14 px-6 bg-gradient-to-b from-transparent via-indigo-50/20 to-transparent">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-5xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+                <h2 className="text-4xl font-semibold tracking-tight text-foreground mb-3 text-balance">
                   Quality. Innovation. Excellence.
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                <p className="text-base text-muted-foreground leading-relaxed mb-3">
                   Founded in 2012, Cyclenet Supplies has grown from a small toll manufacturing business to a leading manufacturer of customized uniforms and promotional wear in Bulawayo.
                 </p>
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   We combine cutting-edge production equipment with skilled craftsmanship to deliver products that exceed expectations. Our commitment to quality control and dependable delivery has made us the trusted choice for businesses across industries.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="p-8 bg-card border-border hover:shadow-lg transition-shadow">
-                  <div className="text-4xl font-semibold text-foreground mb-2">2012</div>
+              <div className="grid grid-cols-2 gap-3">
+                <Card className="p-5 bg-card border-border hover:shadow-lg transition-shadow">
+                  <div className="text-3xl font-semibold text-foreground mb-1">2012</div>
                   <div className="text-sm text-muted-foreground">Established</div>
                 </Card>
-                <Card className="p-8 bg-card border-border hover:shadow-lg transition-shadow">
-                  <div className="text-4xl font-semibold text-foreground mb-2">19+</div>
+                <Card className="p-5 bg-card border-border hover:shadow-lg transition-shadow">
+                  <div className="text-3xl font-semibold text-foreground mb-1">19+</div>
                   <div className="text-sm text-muted-foreground">Product Lines</div>
                 </Card>
-                <Card className="p-8 bg-card border-border hover:shadow-lg transition-shadow col-span-2">
-                  <div className="text-4xl font-semibold text-foreground mb-2">100%</div>
+                <Card className="p-5 bg-card border-border hover:shadow-lg transition-shadow col-span-2">
+                  <div className="text-3xl font-semibold text-foreground mb-1">100%</div>
                   <div className="text-sm text-muted-foreground">Custom Manufacturing</div>
                 </Card>
               </div>
@@ -313,44 +313,45 @@ export default function Page() {
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-32 px-6 bg-gradient-to-b from-transparent via-violet-50/20 to-transparent">
+      <section id="products" className="py-14 px-6 bg-gradient-to-b from-transparent via-violet-50/20 to-transparent">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+          <AnimatedSection className="text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-3 text-balance">
               Our Complete Collection
             </h2>
-            <p className="text-xl text-muted-foreground text-balance">
+            <p className="text-base text-muted-foreground text-balance">
               From protective wear to formal attire, we craft everything your business needs.
             </p>
           </AnimatedSection>
 
-          <div className="space-y-32">
+          <div className="space-y-10">
             {productCategories.map((category, categoryIndex) => (
-              <AnimatedSection key={category.title} delay={categoryIndex * 50}>
-                <div className="space-y-8">
+              <AnimatedSection key={category.title} delay={categoryIndex * 30}>
+                <div className="space-y-3">
                   <div>
-                    <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
                       {category.title}
                     </h3>
-                    <div className="h-1 w-20 bg-primary rounded-full" />
+                    <div className="h-0.5 w-12 bg-primary rounded-full" />
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                     {category.items.map((item, itemIndex) => (
                       <Card
                         key={item.name}
                         className="group bg-card border-border hover:shadow-md hover:scale-[1.02] transition-all duration-300 overflow-hidden"
-                        style={{ transitionDelay: `${itemIndex * 50}ms` }}
+                        style={{ transitionDelay: `${itemIndex * 30}ms` }}
                       >
                         <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
+                            loading="lazy"
                             className="object-cover group-hover:scale-110 transition-transform duration-500"
                             sizes="(max-width: 768px) 50vw, 33vw"
                           />
                         </div>
-                        <div className="px-2 py-1.5 space-y-0.5">
+                        <div className="px-2 py-1 space-y-0.5">
                           <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
                             {item.name}
                           </h4>
@@ -369,20 +370,20 @@ export default function Page() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6 bg-gradient-to-b from-transparent via-rose-50/20 to-transparent">
+      <section className="py-14 px-6 bg-gradient-to-b from-transparent via-rose-50/20 to-transparent">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-primary text-primary-foreground rounded-3xl p-16 text-center">
+          <div className="bg-primary text-primary-foreground rounded-2xl p-10 text-center">
             <AnimatedSection>
-              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-balance">
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3 text-balance">
                 Ready to elevate your brand?
               </h2>
-              <p className="text-lg mb-10 opacity-90 text-balance leading-relaxed">
+              <p className="text-base mb-6 opacity-90 text-balance leading-relaxed">
                 Get in touch with our team to discuss your custom uniform and promotional wear needs.
               </p>
               <Button 
                 size="lg" 
                 variant="secondary"
-                className="rounded-full px-8 h-12 text-base"
+                className="rounded-full px-8 h-11 text-sm"
                 asChild
               >
                 <a href="#contact">Contact Us Today</a>
@@ -393,50 +394,50 @@ export default function Page() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 px-6 bg-gradient-to-b from-transparent via-amber-50/20 to-transparent">
+      <section id="contact" className="py-14 px-6 bg-gradient-to-b from-transparent via-amber-50/20 to-transparent">
         <div className="max-w-4xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6">
+          <AnimatedSection className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-2">
               Get in Touch
             </h2>
-            <p className="text-xl text-muted-foreground text-balance">
+            <p className="text-base text-muted-foreground text-balance">
               We&apos;re here to help bring your vision to life.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={100}>
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="p-8 bg-card border-border text-center hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-primary" />
+            <div className="grid md:grid-cols-3 gap-4">
+              <Card className="p-5 bg-card border-border text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                <h3 className="font-medium text-foreground mb-3">Phone</h3>
+                <h3 className="font-medium text-foreground mb-2 text-sm">Phone</h3>
                 <p className="text-sm text-muted-foreground mb-1">+263 772 357 054</p>
                 <p className="text-sm text-muted-foreground mb-1">+263 774 677 950</p>
                 <p className="text-sm text-muted-foreground">+263 29 246 1309</p>
               </Card>
 
-              <Card className="p-8 bg-card border-border text-center hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-primary" />
+              <Card className="p-5 bg-card border-border text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                <h3 className="font-medium text-foreground mb-3">Email</h3>
+                <h3 className="font-medium text-foreground mb-2 text-sm">Email</h3>
                 <p className="text-sm text-muted-foreground break-all">
                   cyclenetsupplies@gmail.com
                 </p>
               </Card>
 
-              <Card className="p-8 bg-card border-border text-center hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-primary" />
+              <Card className="p-5 bg-card border-border text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                <h3 className="font-medium text-foreground mb-3">Address</h3>
+                <h3 className="font-medium text-foreground mb-2 text-sm">Address</h3>
                 <p className="text-sm text-muted-foreground">
                   Unit 4 Johnson Building
                   <br />
@@ -451,7 +452,7 @@ export default function Page() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border bg-background/80">
+      <footer className="py-6 px-6 border-t border-border bg-background/80">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Cyclenet Supplies. Crafting quality since 2012.
