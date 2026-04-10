@@ -338,10 +338,10 @@ export default function Page() {
                     {category.items.map((item, itemIndex) => (
                       <Card 
                         key={item.name}
-                        className="group break-inside-avoid bg-card border-border hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden"
+                        className="group break-inside-avoid bg-card border-border hover:shadow-lg hover:scale-[1.02] transition-all duration-300 overflow-hidden"
                         style={{ transitionDelay: `${itemIndex * 50}ms` }}
                       >
-                        <div className="relative aspect-square w-full overflow-hidden bg-muted">
+                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -350,11 +350,11 @@ export default function Page() {
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                         </div>
-                        <div className="p-6 space-y-3">
-                          <h4 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors">
+                        <div className="p-3 space-y-2">
+                          <h4 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
                             {item.name}
                           </h4>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
+                          <p className="text-xs text-muted-foreground leading-snug line-clamp-1">
                             {item.description}
                           </p>
                         </div>
