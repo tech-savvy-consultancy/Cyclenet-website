@@ -334,11 +334,11 @@ export default function Page() {
                     </h3>
                     <div className="h-1 w-20 bg-primary rounded-full" />
                   </div>
-                  <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {category.items.map((item, itemIndex) => (
-                      <Card 
+                      <Card
                         key={item.name}
-                        className="group break-inside-avoid bg-card border-border hover:shadow-lg hover:scale-[1.02] transition-all duration-300 overflow-hidden"
+                        className="group bg-card border-border hover:shadow-md hover:scale-[1.02] transition-all duration-300 overflow-hidden"
                         style={{ transitionDelay: `${itemIndex * 50}ms` }}
                       >
                         <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
@@ -347,14 +347,14 @@ export default function Page() {
                             alt={item.name}
                             fill
                             className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                           />
                         </div>
-                        <div className="p-3 space-y-2">
-                          <h4 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                        <div className="px-2 py-1.5 space-y-0.5">
+                          <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
                             {item.name}
                           </h4>
-                          <p className="text-xs text-muted-foreground leading-snug line-clamp-1">
+                          <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
                             {item.description}
                           </p>
                         </div>
