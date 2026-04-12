@@ -18,7 +18,7 @@ const productCategories = [
   {
     title: 'Dust Coats',
     items: [
-      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat.jpg' },
+      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat.png' },
       { name: 'Lab Coat', description: 'Standard and premium lab coats', image: '/products/lab-coat.jpg' }
     ]
   },
