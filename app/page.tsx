@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ChevronDown, Mail, Phone, MapPin } from 'lucide-react'
+import { ChevronDown, Mail, Phone, MapPin, Menu, X } from 'lucide-react'
 import Image from 'next/image'
 
 const productCategories = [
@@ -215,6 +215,7 @@ function AnimatedSection({
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -232,10 +233,21 @@ export default function Page() {
       {/* Header */}
       <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <nav className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="text-2xl font-semibold tracking-tight text-foreground">
-            CYCLENET
+          <div className="flex items-center gap-2">
+            <Image 
+              src="/logo.png" 
+              alt="Cyclenet Logo" 
+              width={36} 
+              height={36}
+              className="w-9 h-9"
+            />
+            <span className="text-xl font-semibold tracking-tight text-foreground">
+              CYCLENET
+            </span>
           </div>
-          <div className="flex items-center gap-8">
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
             <a href="#products" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Products
             </a>
@@ -246,7 +258,43 @@ export default function Page() {
               Contact
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </nav>
+
+        {/* Mobile Navigation */}
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-48' : 'max-h-0'}`}>
+          <div className="px-6 py-4 space-y-3 bg-background/95 border-t border-border">
+            <a 
+              href="#products" 
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Products
+            </a>
+            <a 
+              href="#about" 
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </a>
+            <a 
+              href="#contact" 
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact
+            </a>
+          </div>
+        </div>
       </header>
 
       {/* Hero Section with Parallax */}
