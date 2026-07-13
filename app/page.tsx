@@ -214,19 +214,7 @@ function AnimatedSection({
 }
 
 export default function Page() {
-  const [scrollY, setScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const parallaxOffset = scrollY * 0.5
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
@@ -297,23 +285,35 @@ export default function Page() {
         </div>
       </header>
 
-      {/* Hero Section with Parallax */}
+      {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-gradient-to-b from-blue-100/40 via-purple-100/30 to-transparent"
-          style={{ transform: `translateY(${parallaxOffset}px)` }}
-        />
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/products/ordinary-worksuit.jpg"
+        >
+          <source
+            src="https://videos.pexels.com/video-files/6474194/6474194-uhd_2560_1440_25fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Dark overlay for text contrast */}
+        <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white mb-6 text-balance">
             Crafted to perfection.
             <br />
             Designed for you.
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 text-balance leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/85 mb-12 text-balance leading-relaxed">
             Custom made clothing and promotional wear, manufactured with precision and delivered with care.
           </p>
           <Button 
             size="lg" 
+            variant="secondary"
             className="rounded-full px-8 h-12 text-base"
             asChild
           >
@@ -321,7 +321,7 @@ export default function Page() {
           </Button>
         </div>
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-6 h-6 text-muted-foreground" />
+          <ChevronDown className="w-6 h-6 text-white/80" />
         </div>
       </section>
 
