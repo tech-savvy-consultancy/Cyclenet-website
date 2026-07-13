@@ -297,25 +297,12 @@ export default function Page() {
         </div>
       </header>
 
-      {/* Hero Section with Video Background */}
+      {/* Hero Section with Parallax */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-manufacturing-poster.png"
-          style={{ transform: `translateY(${parallaxOffset}px) scale(1.1)` }}
-        >
-          <source src="https://assets.mixkit.co/videos/12020/12020-720.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/13948/13948-720.mp4" type="video/mp4" />
-        </video>
-        {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-[1px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
-
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-blue-100/40 via-purple-100/30 to-transparent"
+          style={{ transform: `translateY(${parallaxOffset}px)` }}
+        />
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-foreground mb-6 text-balance">
             Crafted to perfection.
@@ -333,7 +320,7 @@ export default function Page() {
             <a href="#products">Explore Our Collection</a>
           </Button>
         </div>
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-10">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
           <ChevronDown className="w-6 h-6 text-muted-foreground" />
         </div>
       </section>
