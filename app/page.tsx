@@ -113,8 +113,8 @@ const productCategories = [
   {
     title: 'Gumboots & Rubber Boots',
     items: [
-      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots.jpg' },
-      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gumboots-low-cut.jpg' }
+      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots-removebg-preview.png' },
+      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gum_boots_low_cut-removebg-preview.png' }
     ]
   },
   {
