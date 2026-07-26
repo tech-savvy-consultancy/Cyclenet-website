@@ -89,7 +89,7 @@ const productCategories = [
     title: 'Security Uniform',
     items: [
       { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts', image: '/products/security_shirt-removebg-preview.png' },
-      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants.jpg' },
+      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants-removebg-preview (1).png' },
       { name: "Security's Jacket", description: 'Security jackets', image: '/products/sec_jacket-removebg-preview.png' }
     ]
   },
@@ -97,8 +97,8 @@ const productCategories = [
     title: "Chef's Uniform",
     items: [
       { name: 'Chefs Top Wear', description: 'Professional chef jackets', image: '/products/chefs-top-removebg-preview.png' },
-      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron.jpg' },
-      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants.jpg' }
+      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron-removebg-preview.png' },
+      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants-removebg-preview.png' }
     ]
   },
   {
