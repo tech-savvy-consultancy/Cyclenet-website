@@ -159,29 +159,70 @@ const productCategories = [
   }
 ]
 
+function HeroVideo() {
+  const [src, setSrc] = useState<string | null>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    // Skip video entirely for reduced-motion users, and serve a light
+    // 360p file to small screens so mobile isn't downloading 2.6MB.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const small = window.matchMedia('(max-width: 768px)').matches
+    setSrc(small ? '/hero-manufacturing-360.mp4' : '/hero-manufacturing.mp4')
+  }, [])
+
+  return (
+    <div className="absolute inset-0" aria-hidden="true">
+      {/* Poster paints immediately so the hero never flashes empty */}
+      <div className="absolute inset-0 bg-[url('/hero-poster.jpg')] bg-cover bg-center" />
+      {src && (
+        <video
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            ready ? 'opacity-100' : 'opacity-0'
+          }`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/hero-poster.jpg"
+          onCanPlay={() => setReady(true)}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      )}
+      {/* Gradient overlay: stronger at the edges to keep text legible */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/80" />
+    </div>
+  )
+}
+
 function useScrollAnimation() {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const node = ref.current
+    if (!node) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
+          // Stop observing once revealed to keep scrolling cheap.
+          observer.disconnect()
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+      { threshold: 0, rootMargin: '200px 0px' }
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
-    }
+    observer.observe(node)
+    return () => observer.disconnect()
   }, [])
 
   return { ref, isVisible }
@@ -201,10 +242,10 @@ function AnimatedSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out ${
+      className={`transition-[opacity,transform] duration-500 ease-out will-change-[opacity,transform] ${
         isVisible 
           ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-12'
+          : 'opacity-0 translate-y-4'
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -219,7 +260,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border">
+      <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border">
         <nav className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image 
@@ -227,6 +268,7 @@ export default function Page() {
               alt="Cyclenet Logo" 
               width={36} 
               height={36}
+              priority
               className="w-9 h-9"
             />
             <span className="text-xl font-semibold tracking-tight text-foreground">
@@ -287,21 +329,7 @@ export default function Page() {
 
       {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/products/ordinary-worksuit.jpg"
-        >
-          <source
-            src="https://videos.pexels.com/video-files/6474194/6474194-uhd_2560_1440_25fps.mp4"
-            type="video/mp4"
-          />
-        </video>
-        {/* Dark overlay for text contrast */}
-        <div className="absolute inset-0 bg-black/55" />
+        <HeroVideo />
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white mb-6 text-balance">
             Crafted to perfection.
@@ -373,9 +401,9 @@ export default function Page() {
           </AnimatedSection>
 
           <div className="space-y-10">
-            {productCategories.map((category, categoryIndex) => (
-              <AnimatedSection key={category.title} delay={categoryIndex * 30}>
-                <div className="space-y-3">
+            {productCategories.map((category) => (
+              <AnimatedSection key={category.title}>
+                <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
                   <div>
                     <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
                       {category.title}
@@ -383,11 +411,10 @@ export default function Page() {
                     <div className="h-0.5 w-12 bg-primary rounded-full" />
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {category.items.map((item, itemIndex) => (
+                    {category.items.map((item) => (
                       <Card
                         key={item.name}
-                        className="group bg-card border-border hover:shadow-md hover:scale-[1.02] transition-all duration-300 overflow-hidden"
-                        style={{ transitionDelay: `${itemIndex * 30}ms` }}
+                        className="group bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
                       >
                         <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                           <Image
@@ -395,8 +422,9 @@ export default function Page() {
                             alt={item.name}
                             fill
                             loading="lazy"
-                            className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            sizes="(max-width: 768px) 50vw, 33vw"
+                            quality={65}
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
                           />
                         </div>
                         <div className="px-2 py-1 space-y-0.5">
