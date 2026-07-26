@@ -162,61 +162,22 @@ const productCategories = [
 function HeroVideo() {
   const [src, setSrc] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Decide *if* and *which* video to fetch, only once the page is idle so it
-  // never competes with the poster paint or the product images.
   useEffect(() => {
+    // Skip video entirely for reduced-motion users, and serve a light
+    // 360p file to small screens so mobile isn't downloading 2.6MB.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const conn = (navigator as Navigator & { connection?: { effectiveType?: string; saveData?: boolean } }).connection
-    // Respect Data Saver and 2g/3g connections: poster only, no video download.
-    if (conn?.saveData || (conn?.effectiveType && /(^|-)2g$|3g/.test(conn.effectiveType))) return
-
     const small = window.matchMedia('(max-width: 768px)').matches
-    const load = () => setSrc(small ? '/hero-manufacturing-360.mp4' : '/hero-manufacturing.mp4')
-
-    const idle = window.requestIdleCallback
-    const handle = idle ? idle(load, { timeout: 1500 }) : window.setTimeout(load, 400)
-    return () => {
-      if (idle) window.cancelIdleCallback?.(handle as number)
-      else clearTimeout(handle as number)
-    }
+    setSrc(small ? '/hero-manufacturing-360.mp4' : '/hero-manufacturing.mp4')
   }, [])
 
-  // A video that keeps decoding after you scroll past it wastes CPU and causes
-  // scroll jank, so pause it whenever the hero leaves the viewport.
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {})
-        else video.pause()
-      },
-      { threshold: 0.1 }
-    )
-    observer.observe(video)
-    return () => observer.disconnect()
-  }, [src])
-
   return (
-    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-      {/* Optimized poster paints first and becomes the LCP element */}
-      <Image
-        src="/hero-poster.jpg"
-        alt=""
-        fill
-        priority
-        quality={55}
-        sizes="100vw"
-        className="object-cover"
-      />
+    <div className="absolute inset-0" aria-hidden="true">
+      {/* Poster paints immediately so the hero never flashes empty */}
+      <div className="absolute inset-0 bg-[url('/hero-poster.jpg')] bg-cover bg-center" />
       {src && (
         <video
-          ref={videoRef}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             ready ? 'opacity-100' : 'opacity-0'
           }`}
           autoPlay
@@ -224,16 +185,14 @@ function HeroVideo() {
           loop
           playsInline
           preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
+          poster="/hero-poster.jpg"
           onCanPlay={() => setReady(true)}
         >
           <source src={src} type="video/mp4" />
         </video>
       )}
-      {/* Legibility overlay, plus a fade so the hero blends into the page below */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      {/* Gradient overlay: stronger at the edges to keep text legible */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/80" />
     </div>
   )
 }
