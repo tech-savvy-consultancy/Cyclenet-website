@@ -117,41 +117,16 @@ const productCategories = [
       { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gum_boots_low_cut-removebg-preview.png' }
     ]
   },
-  {
-    title: 'Head Gear',
-    items: [
-      { name: 'Helmets', description: 'Safety helmets for construction and industry', image: '/products/helmet.jpg' },
-      { name: 'Baseball Cap', description: 'Custom branded baseball caps', image: '/products/baseball-cap.jpg' },
-      { name: 'Sun Hat', description: 'Protective sun hats', image: '/products/sun-hat.jpg' }
-    ]
-  },
+ 
   {
     title: 'Protective Gloves',
     items: [
-      { name: 'Cleaning Gloves', description: 'Durable cleaning gloves', image: '/products/cleaning-gloves.jpg' },
-      { name: 'Sports Gloves', description: 'Athletic and sports gloves', image: '/products/sports-gloves.jpg' },
-      { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction-gloves.jpg' }
+      { name: 'Cleaning Gloves', description: 'Durable cleaning gloves', image: '/products/gloves-removebg-preview.png' },
+      { name: 'Sports Gloves', description: 'Athletic and sports gloves', image: '/products/sports_gloves-removebg-preview.png' },
+      { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction_gloves-removebg-preview.png' }
     ]
   },
-  {
-    title: 'Goggles',
-    items: [
-      { name: 'Welding Goggles', description: 'Professional welding protection', image: '/products/welding-goggles.jpg' },
-      { name: 'UV Goggles', description: 'UV protection goggles', image: '/products/uv-goggles.jpg' },
-      { name: 'Protective Goggles', description: 'General protective eyewear', image: '/products/protective-goggles.jpg' }
-    ]
-  },
-
-
-  {
-    title: "Security's Accessories",
-    items: [
-      { name: 'Hand Cuffs', description: 'Professional handcuffs', image: '/products/handcuffs.jpg' },
-      { name: 'Sun Glasses', description: 'Security sunglasses', image: '/products/sunglasses.jpg' },
-      { name: 'Button Stick', description: 'Security batons', image: '/products/button-stick.jpg' }
-    ]
-  },
-
+ 
   {
     title: 'Branding & Banners',
     items: [
