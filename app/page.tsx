@@ -10,16 +10,111 @@ const productCategories = [
   {
     title: 'Protective Wear',
     items: [
-      { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit.jpg' },
-      { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/acid-proof-worksuit.jpg' },
-      { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/fire-proof-worksuit.jpg' }
+      { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit-removebg-preview.png' },
+      { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Acid-proof_worksuit-removebg-preview.png' },
+      { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Fire-proof_worksuit-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Reflective Vests & Jackets',
+    items: [
+      { name: 'Reflective Half Jacket', description: 'High-visibility half jackets', image: '/products/Screenshot_26-7-2026_16581_www.bing.com-removebg-preview.png' },
+      { name: "Miner's Reflective Jacket", description: 'Mining industry reflective wear', image: '/products/Miners_reflective_jacket-removebg-preview.png' },
+      { name: 'Work Reflective Jacket', description: 'General work reflective jackets', image: '/products/work_reflective_jacket-removebg-preview.png' }
     ]
   },
   {
     title: 'Dust Coats',
     items: [
-      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat.jpg' },
-      { name: 'Lab Coat', description: 'Standard and premium lab coats', image: '/products/lab-coat.jpg' }
+      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat-removebg-preview.png' },
+      { name: 'Lab Coat', description: 'Standard and premium lab coats', image: '/products/lab-coat-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Formal Wear',
+    items: [
+      { name: 'Short Sleeved Shirt', description: 'Formal short-sleeved shirts', image: '/products/short-sleeved-shirt-removebg-preview.png' },
+      { name: 'Long Sleeve Shirt', description: 'Formal long-sleeved shirts', image: '/products/long-sleeve-shirt-removebg-preview.png' },
+      { name: 'Ladies Blouse', description: 'Professional ladies blouses', image: '/products/ladies-blouse-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Ladies Formal Wear',
+    items: [
+      { name: "Women's Formal Suit", description: 'Professional business suits', image: '/products/womens_blazer-removebg-preview.png' },
+      { name: "Women's Formal Pants", description: 'Elegant formal trousers', image: '/products/womens_formal_pants-removebg-preview.png' },
+      { name: "Women's Suit", description: 'Complete women\'s formal collection', image: '/products/ladies_formal_wear-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'T-Shirts',
+    items: [
+      { name: 'Round Neck T-Shirt', description: 'Classic round neck design', image: '/products/Screenshot_26-7-2026_17236_www.bing.com-removebg-preview.png' },
+      { name: 'V Neck T-Shirt', description: 'Stylish V-neck t-shirts', image: '/products/Screenshot_26-7-2026_172647_www.bing.com-removebg-preview.png' },
+      { name: 'Golf T-Shirt', description: 'Custom promotional t-shirts', image: '/products/golf_shirt-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'School Wear',
+    items: [
+      { name: "Boys Uniform", description: 'Complete boys school uniforms', image: '/products/boys_uniform-removebg-preview.png' },
+      { name: "Girl's Uniform", description: 'Complete girls school uniforms', image: '/products/Girls_uniform-removebg-preview.png' },
+      { name: "Tunic & Boys Shorts", description: 'School tunics and shorts', image: '/products/girls_uniforms-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Golf T-Shirts',
+    items: [
+      { name: 'Golf T-Shirt', description: 'Classic golf shirts', image: '/products/golf-tshirt-removebg-preview.png' },
+      { name: 'Slim Fit Golf T-Shirt', description: 'Modern slim-fit golf shirts', image: '/products/slim-fit-golf-tshirt-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Safari Wear',
+    items: [
+      { name: 'Safari Shirt', description: 'Classic safari shirts', image: '/products/safari-shirt-removebg-preview.png' },
+      { name: 'Safari Multi Pocket Half Jacket', description: 'Functional safari jackets', image: '/products/safari_vest-removebg-preview.png' },
+      { name: 'Safari Shorts', description: 'Durable safari shorts', image: '/products/safari-shorts-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Hospital Wear',
+    items: [
+      { name: "Nurse's Top Wear", description: 'Professional nursing tops', image: '/products/Screenshot_26-7-2026_174848_www.bing.com-removebg-preview.png' },
+      { name: "Nurse's Pants", description: 'Comfortable nursing pants', image: '/products/Screenshot_26-7-2026_175219_www.bing.com-removebg-preview.png' },
+      { name: 'Theatre Gown', description: 'Surgical theatre gowns', image: '/products/Screenshot_26-7-2026_175830_www.bing.com-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Security Uniform',
+    items: [
+      { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts', image: '/products/security_shirt-removebg-preview.png' },
+      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants.jpg' },
+      { name: "Security's Jacket", description: 'Security jackets', image: '/products/sec_jacket-removebg-preview.png' }
+    ]
+  },
+  {
+    title: "Chef's Uniform",
+    items: [
+      { name: 'Chefs Top Wear', description: 'Professional chef jackets', image: '/products/chefs-top-removebg-preview.png' },
+      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron.jpg' },
+      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants.jpg' }
+    ]
+  },
+  {
+    title: 'Safety Shoes',
+    items: [
+      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low-cut-safety-shoe.jpg' },
+      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/high-cut-safety-boots.jpg' },
+      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety-shoe.jpg' }
+    ]
+  },
+
+  {
+    title: 'Gumboots & Rubber Boots',
+    items: [
+      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots.jpg' },
+      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gumboots-low-cut.jpg' }
     ]
   },
   {
@@ -46,92 +141,8 @@ const productCategories = [
       { name: 'Protective Goggles', description: 'General protective eyewear', image: '/products/protective-goggles.jpg' }
     ]
   },
-  {
-    title: 'Safety Shoes',
-    items: [
-      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low-cut-safety-shoe.jpg' },
-      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/high-cut-safety-boots.jpg' },
-      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety-shoe.jpg' }
-    ]
-  },
-  {
-    title: 'Ladies Formal Wear',
-    items: [
-      { name: "Women's Formal Suit", description: 'Professional business suits', image: '/products/womens-formal-suit.jpg' },
-      { name: "Women's Formal Pants", description: 'Elegant formal trousers', image: '/products/womens-formal-pants.jpg' },
-      { name: "Women's Wear", description: 'Complete women\'s formal collection', image: '/products/womens-wear.jpg' }
-    ]
-  },
-  {
-    title: 'T-Shirts',
-    items: [
-      { name: 'Round Neck T-Shirt', description: 'Classic round neck design', image: '/products/round-neck-tshirt.jpg' },
-      { name: 'V Neck T-Shirt', description: 'Stylish V-neck t-shirts', image: '/products/v-neck-tshirt.jpg' },
-      { name: 'T-Shirt', description: 'Custom promotional t-shirts', image: '/products/tshirt.jpg' }
-    ]
-  },
-  {
-    title: 'School Wear',
-    items: [
-      { name: "Boys Uniform", description: 'Complete boys school uniforms', image: '/products/boys-uniform.jpg' },
-      { name: "Girl's Uniform", description: 'Complete girls school uniforms', image: '/products/girls-uniform.jpg' },
-      { name: "Tunic & Boys Shorts", description: 'School tunics and shorts', image: '/products/tunic-boys-shorts.jpg' }
-    ]
-  },
-  {
-    title: 'Reflective Vests & Jackets',
-    items: [
-      { name: 'Reflective Half Jacket', description: 'High-visibility half jackets', image: '/products/reflective-half-jacket.jpg' },
-      { name: "Miner's Reflective Jacket", description: 'Mining industry reflective wear', image: '/products/miners-reflective-jacket.jpg' },
-      { name: 'Work Reflective Jacket', description: 'General work reflective jackets', image: '/products/work-reflective-jacket.jpg' }
-    ]
-  },
-  {
-    title: 'Safari Wear',
-    items: [
-      { name: 'Safari Shirt', description: 'Classic safari shirts', image: '/products/safari-shirt.jpg' },
-      { name: 'Safari Multi Pocket Half Jacket', description: 'Functional safari jackets', image: '/products/safari-multi-pocket-jacket.jpg' },
-      { name: 'Safari Shorts', description: 'Durable safari shorts', image: '/products/safari-shorts.jpg' }
-    ]
-  },
-  {
-    title: 'Golf T-Shirts',
-    items: [
-      { name: 'Golf T-Shirt', description: 'Classic golf shirts', image: '/products/golf-tshirt.jpg' },
-      { name: 'Slim Fit Golf T-Shirt', description: 'Modern slim-fit golf shirts', image: '/products/slim-fit-golf-tshirt.jpg' }
-    ]
-  },
-  {
-    title: "Chef's Uniform",
-    items: [
-      { name: 'Chefs Top Wear', description: 'Professional chef jackets', image: '/products/chefs-top.jpg' },
-      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron.jpg' },
-      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants.jpg' }
-    ]
-  },
-  {
-    title: 'Gumboots & Rubber Boots',
-    items: [
-      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots.jpg' },
-      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gumboots-low-cut.jpg' }
-    ]
-  },
-  {
-    title: 'Formal Wear',
-    items: [
-      { name: 'Short Sleeved Shirt', description: 'Formal short-sleeved shirts', image: '/products/short-sleeved-shirt.jpg' },
-      { name: 'Long Sleeve Shirt', description: 'Formal long-sleeved shirts', image: '/products/long-sleeve-shirt.jpg' },
-      { name: 'Ladies Blouse', description: 'Professional ladies blouses', image: '/products/ladies-blouse.jpg' }
-    ]
-  },
-  {
-    title: 'Security Uniform',
-    items: [
-      { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts', image: '/products/security-long-sleeved-shirt.jpg' },
-      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants.jpg' },
-      { name: "Security's Jacket", description: 'Security jackets', image: '/products/security-jacket.jpg' }
-    ]
-  },
+
+
   {
     title: "Security's Accessories",
     items: [
@@ -140,14 +151,7 @@ const productCategories = [
       { name: 'Button Stick', description: 'Security batons', image: '/products/button-stick.jpg' }
     ]
   },
-  {
-    title: 'Hospital Wear',
-    items: [
-      { name: "Nurse's Top Wear", description: 'Professional nursing tops', image: '/products/nurses-top.jpg' },
-      { name: "Nurse's Pants", description: 'Comfortable nursing pants', image: '/products/nurses-pants.jpg' },
-      { name: 'Theatre Gown', description: 'Surgical theatre gowns', image: '/products/theatre-gown.jpg' }
-    ]
-  },
+
   {
     title: 'Branding & Banners',
     items: [
@@ -271,10 +275,11 @@ export default function Page() {
             />
             <span className="text-xl font-semibold tracking-tight text-foreground">
               CYCLENET SUPPLIES
-              <sup className="ml-1 align-super text-sm md:text-lg font-semibold tracking-wide text-muted-foreground">
+              <sup className="ml-2 align-super text-xs md:text-sm font-semibold tracking-wide text-foreground relative top-1">
                 Pvt Ltd
               </sup>
             </span>
+
           </div>
 
           {/* Desktop Navigation */}
@@ -424,7 +429,7 @@ export default function Page() {
                             fill
                             loading="lazy"
                             quality={65}
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            className="object-contain transition-transform duration-300 group-hover:scale-105"
                             sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
                           />
                         </div>
