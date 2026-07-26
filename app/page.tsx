@@ -242,8 +242,8 @@ function AnimatedSection({
     <div
       ref={ref}
       className={`transition-[opacity,transform] duration-500 ease-out will-change-[opacity,transform] ${isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-4'
+        ? 'opacity-100 translate-y-0'
+        : 'opacity-0 translate-y-4'
         } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -269,9 +269,12 @@ export default function Page() {
               priority
               className="w-9 h-9"
             />
-            <span className="text-xl font-semibold tracking-tight text-foreground">
-              CYCLENET SUPPLIES
-            </span>
+           <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-none">
+  Cyclenet Supplies
+  <span className="relative -top-6 ml-1 text-xs md:text-base font-semibold uppercase tracking-widest text-muted-foreground">
+    Pvt Ltd
+  </span>
+</h1>
           </div>
 
           {/* Desktop Navigation */}
