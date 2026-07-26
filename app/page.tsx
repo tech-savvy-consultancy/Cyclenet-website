@@ -126,7 +126,14 @@ const productCategories = [
       { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction_gloves-removebg-preview.png' }
     ]
   },
- 
+   {
+    title: 'Bedding',
+    items: [
+      { name: 'Duvet covers ', description: 'Plain white, soft and comfortable duvet covers and pillows', image: '/products/decoração de cama de casal.jpg' },
+      { name: 'Patterned Duvet covers', description: 'Sleep comfortably in warmth and soft bedding sheets and duvets', image: '/products/Sleep like royalty, every night, with our….jpg' },
+      
+    ]
+  },
   {
     title: 'Branding & Banners',
     items: [
