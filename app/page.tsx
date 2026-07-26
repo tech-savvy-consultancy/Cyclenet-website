@@ -104,9 +104,9 @@ const productCategories = [
   {
     title: 'Safety Shoes',
     items: [
-      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low-cut-safety-shoe.jpg' },
-      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/high-cut-safety-boots.jpg' },
-      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety-shoe.jpg' }
+      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low_cut_safety_shoes-removebg-preview.png' },
+      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/highcut_safety_boots-removebg-preview.png' },
+      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety_boots-removebg-preview.png' }
     ]
   },
 
