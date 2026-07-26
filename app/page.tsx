@@ -177,9 +177,8 @@ function HeroVideo() {
       <div className="absolute inset-0 bg-[url('/hero-poster.jpg')] bg-cover bg-center" />
       {src && (
         <video
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-            ready ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${ready ? 'opacity-100' : 'opacity-0'
+            }`}
           autoPlay
           muted
           loop
@@ -228,11 +227,11 @@ function useScrollAnimation() {
   return { ref, isVisible }
 }
 
-function AnimatedSection({ 
-  children, 
-  className = '', 
-  delay = 0 
-}: { 
+function AnimatedSection({
+  children,
+  className = '',
+  delay = 0
+}: {
   children: React.ReactNode
   className?: string
   delay?: number
@@ -242,11 +241,10 @@ function AnimatedSection({
   return (
     <div
       ref={ref}
-      className={`transition-[opacity,transform] duration-500 ease-out will-change-[opacity,transform] ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
+      className={`transition-[opacity,transform] duration-500 ease-out will-change-[opacity,transform] ${isVisible
+          ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4'
-      } ${className}`}
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -263,19 +261,19 @@ export default function Page() {
       <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border">
         <nav className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image 
-              src="/logo.png" 
-              alt="Cyclenet Logo" 
-              width={36} 
+            <Image
+              src="/logo.png"
+              alt="Cyclenet Logo"
+              width={36}
               height={36}
               priority
               className="w-9 h-9"
             />
             <span className="text-xl font-semibold tracking-tight text-foreground">
-              CYCLENET
+              CYCLENET SUPPLIES
             </span>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <a href="#products" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -290,7 +288,7 @@ export default function Page() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className="md:hidden p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -302,22 +300,22 @@ export default function Page() {
         {/* Mobile Navigation */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-48' : 'max-h-0'}`}>
           <div className="px-6 py-4 space-y-3 bg-background/95 border-t border-border">
-            <a 
-              href="#products" 
+            <a
+              href="#products"
               className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               Products
             </a>
-            <a 
-              href="#about" 
+            <a
+              href="#about"
               className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               About
             </a>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -339,8 +337,8 @@ export default function Page() {
           <p className="text-xl md:text-2xl text-white/85 mb-12 text-balance leading-relaxed">
             Custom made clothing and promotional wear, manufactured with precision and delivered with care.
           </p>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             variant="secondary"
             className="rounded-full px-8 h-12 text-base"
             asChild
@@ -456,8 +454,8 @@ export default function Page() {
               <p className="text-base mb-6 opacity-90 text-balance leading-relaxed">
                 Get in touch with our team to discuss your custom uniform and promotional wear needs.
               </p>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="secondary"
                 className="rounded-full px-8 h-11 text-sm"
                 asChild
