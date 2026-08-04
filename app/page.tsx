@@ -238,8 +238,134 @@ function AnimatedSection({
   )
 }
 
+type ProductCategory = (typeof productCategories)[number]
+
+function ProductShowcase({
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  categories,
+}: {
+  id?: string
+  eyebrow: string
+  title: string
+  subtitle: string
+  categories: ProductCategory[]
+}) {
+  return (
+    <section id={id} className="py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        <AnimatedSection className="text-center mb-12">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary/70 mb-3">
+            {eyebrow}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-3 text-balance">
+            {title}
+          </h2>
+          <p className="text-base text-muted-foreground text-balance max-w-2xl mx-auto">
+            {subtitle}
+          </p>
+        </AnimatedSection>
+
+        <div className="space-y-12">
+          {categories.map((category) => (
+            <AnimatedSection key={category.title}>
+              <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
+                <div>
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
+                    {category.title}
+                  </h3>
+                  <div className="h-0.5 w-12 bg-primary rounded-full" />
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  {category.items.map((item) => (
+                    <Card
+                      key={item.name}
+                      className="group bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
+                    >
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          loading="lazy"
+                          quality={65}
+                          className="object-contain transition-transform duration-300 group-hover:scale-105"
+                          sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
+                        />
+                      </div>
+                      <div className="px-2 py-1 space-y-0.5">
+                        <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
+                          {item.name}
+                        </h4>
+                        <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
+                          {item.description}
+                        </p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function PromotionalHero() {
+  return (
+    <section className="relative overflow-hidden">
+      {/* Full-width background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/promo-hero.png"
+          alt=""
+          fill
+          loading="lazy"
+          quality={70}
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* Layered gradients for depth and legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-44">
+        <AnimatedSection className="max-w-2xl">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white/70 mb-4">
+            Crafted in Bulawayo
+          </span>
+          <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-white mb-6 text-balance">
+            Precision manufacturing, delivered with care.
+          </h2>
+          <p className="text-lg md:text-xl text-white/80 mb-10 text-balance leading-relaxed">
+            From a single garment to full corporate outfitting, every piece is
+            tailored to your specifications with premium materials and rigorous
+            quality control.
+          </p>
+          <Button
+            size="lg"
+            variant="secondary"
+            className="rounded-full px-8 h-12 text-base"
+            asChild
+          >
+            <a href="#contact">Request a Quote</a>
+          </Button>
+        </AnimatedSection>
+      </div>
+    </section>
+  )
+}
+
 export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const midpoint = Math.ceil(productCategories.length / 2)
+  const firstHalf = productCategories.slice(0, midpoint)
+  const secondHalf = productCategories.slice(midpoint)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
@@ -342,7 +468,7 @@ export default function Page() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-14 px-6 bg-gradient-to-b from-transparent via-indigo-50/20 to-transparent">
+      <section id="about" className="py-20 px-6 bg-gradient-to-b from-transparent via-indigo-50/20 to-transparent">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -376,65 +502,22 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Products Section */}
-      <section id="products" className="py-14 px-6 bg-gradient-to-b from-transparent via-violet-50/20 to-transparent">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-8">
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-3 text-balance">
-              Our Complete Collection
-            </h2>
-            <p className="text-base text-muted-foreground text-balance">
-              From protective wear to formal attire, we craft everything your business needs.
-            </p>
-          </AnimatedSection>
+      {/* Products Showcase 1 */}
+      <div className="bg-gradient-to-b from-transparent via-violet-50/20 to-transparent">
+        <ProductShowcase
+          id="products"
+          eyebrow="Our Collection"
+          title="Workwear & Protective Gear"
+          subtitle="Durable, industry-ready essentials engineered to keep your team safe, comfortable, and looking sharp."
+          categories={firstHalf}
+        />
+      </div>
 
-          <div className="space-y-10">
-            {productCategories.map((category) => (
-              <AnimatedSection key={category.title}>
-                <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
-                      {category.title}
-                    </h3>
-                    <div className="h-0.5 w-12 bg-primary rounded-full" />
-                  </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {category.items.map((item) => (
-                      <Card
-                        key={item.name}
-                        className="group bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
-                      >
-                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            loading="lazy"
-                            quality={65}
-                            className="object-contain transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
-                          />
-                        </div>
-                        <div className="px-2 py-1 space-y-0.5">
-                          <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
-                            {item.name}
-                          </h4>
-                          <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
-                            {item.description}
-                          </p>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Promotional Hero — visual break between showcases */}
+      <PromotionalHero />
 
       {/* CTA Section */}
-      <section className="py-14 px-6 bg-gradient-to-b from-transparent via-rose-50/20 to-transparent">
+      <section className="py-20 px-6 bg-gradient-to-b from-transparent via-rose-50/20 to-transparent">
         <div className="max-w-4xl mx-auto">
           <div className="bg-primary text-primary-foreground rounded-2xl p-10 text-center">
             <AnimatedSection>
@@ -457,8 +540,18 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Products Showcase 2 */}
+      <div className="bg-gradient-to-b from-transparent via-sky-50/20 to-transparent">
+        <ProductShowcase
+          eyebrow="Our Collection"
+          title="Uniforms, Formalwear & Branding"
+          subtitle="From corporate outfitting to custom promotional pieces, tailored to represent your brand with confidence."
+          categories={secondHalf}
+        />
+      </div>
+
       {/* Contact Section */}
-      <section id="contact" className="py-14 px-6 bg-gradient-to-b from-transparent via-amber-50/20 to-transparent">
+      <section id="contact" className="py-20 px-6 bg-gradient-to-b from-transparent via-amber-50/20 to-transparent">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-2">
