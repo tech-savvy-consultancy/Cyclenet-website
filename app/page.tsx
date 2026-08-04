@@ -117,7 +117,7 @@ const productCategories = [
       { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gum_boots_low_cut-removebg-preview.png' }
     ]
   },
- 
+
   {
     title: 'Protective Gloves',
     items: [
@@ -126,12 +126,12 @@ const productCategories = [
       { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction_gloves-removebg-preview.png' }
     ]
   },
-   {
+  {
     title: 'Bedding',
     items: [
       { name: 'Duvet covers ', description: 'Plain white, soft and comfortable duvet covers and pillows', image: '/products/decoração de cama de casal.jpg' },
       { name: 'Patterned Duvet covers', description: 'Sleep comfortably in warmth and soft bedding sheets and duvets', image: '/products/Sleep like royalty, every night, with our….jpg' },
-      
+
     ]
   },
   {
@@ -432,11 +432,10 @@ function ProductCarousel() {
               onClick={() => goTo(index)}
               aria-label={`Go to slide ${index + 1}`}
               aria-current={index === current}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                index === current
-                  ? 'w-8 bg-primary-foreground'
-                  : 'w-2 bg-primary-foreground/40 hover:bg-primary-foreground/60'
-              }`}
+              className={`h-2 rounded-full transition-all duration-300 ${index === current
+                ? 'w-8 bg-primary-foreground'
+                : 'w-2 bg-primary-foreground/40 hover:bg-primary-foreground/60'
+                }`}
             />
           ))}
         </div>
