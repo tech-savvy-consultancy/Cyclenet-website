@@ -290,7 +290,7 @@ const carouselSlides = [
     title: 'Precision in Every Stitch',
     description:
       'Skilled hands and modern machinery combine to deliver garments built for durability, comfort, and a flawless finish.',
-    image: '/carousel/craftsmanship.png',
+    image: '/carousel/ugandan-crafts-ZWxPGOcUzR4-unsplash.jpg',
     cta: { label: 'Our Process', href: '#about' }
   },
   {
@@ -298,7 +298,7 @@ const carouselSlides = [
     title: 'Unified Teams, Trusted Quality',
     description:
       'Dependable delivery and competitive pricing that help businesses of every size look and feel professional.',
-    image: '/carousel/value.png',
+    image: '/carousel/umit-yildirim-9OB46apMbC4-unsplash.jpg',
     cta: { label: 'Get a Quote', href: '#contact' }
   }
 ]
