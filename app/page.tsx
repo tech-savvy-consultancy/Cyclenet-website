@@ -274,7 +274,7 @@ const carouselSlides = [
     title: 'A Complete Range for Every Industry',
     description:
       'From protective workwear to corporate uniforms, we manufacture premium apparel tailored to your exact specifications.',
-    image: '/carousel/products.png',
+    image: '/carousel/IMG-20260416-WA0011.jpg',
     cta: { label: 'Explore Products', href: '#products' }
   },
   {
