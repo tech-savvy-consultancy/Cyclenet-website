@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ChevronDown, Mail, Phone, MapPin, Menu, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Menu, X } from 'lucide-react'
 import Image from 'next/image'
 
 const productCategories = [
@@ -268,6 +268,183 @@ function ProductDivider({
   )
 }
 
+const carouselSlides = [
+  {
+    eyebrow: 'Our Products',
+    title: 'A Complete Range for Every Industry',
+    description:
+      'From protective workwear to corporate uniforms, we manufacture premium apparel tailored to your exact specifications.',
+    image: '/carousel/products.png',
+    cta: { label: 'Explore Products', href: '#products' }
+  },
+  {
+    eyebrow: 'Branding Services',
+    title: 'Your Logo, Expertly Applied',
+    description:
+      'Professional embroidery and screen printing that turn everyday garments into a lasting extension of your brand.',
+    image: '/carousel/branding.png',
+    cta: { label: 'Brand With Us', href: '#contact' }
+  },
+  {
+    eyebrow: 'Craftsmanship',
+    title: 'Precision in Every Stitch',
+    description:
+      'Skilled hands and modern machinery combine to deliver garments built for durability, comfort, and a flawless finish.',
+    image: '/carousel/craftsmanship.png',
+    cta: { label: 'Our Process', href: '#about' }
+  },
+  {
+    eyebrow: 'Real Value',
+    title: 'Unified Teams, Trusted Quality',
+    description:
+      'Dependable delivery and competitive pricing that help businesses of every size look and feel professional.',
+    image: '/carousel/value.png',
+    cta: { label: 'Get a Quote', href: '#contact' }
+  }
+]
+
+function ProductCarousel() {
+  const [current, setCurrent] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const touchStartX = useRef<number | null>(null)
+  const count = carouselSlides.length
+
+  const goTo = (index: number) => setCurrent((index + count) % count)
+  const next = () => goTo(current + 1)
+  const prev = () => goTo(current - 1)
+
+  // Autoplay, paused on hover/focus/interaction
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setTimeout(() => {
+      setCurrent((c) => (c + 1) % count)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [current, isPaused, count])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const delta = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) next()
+      else prev()
+    }
+    touchStartX.current = null
+  }
+
+  return (
+    <AnimatedSection>
+      <div
+        className="relative overflow-hidden rounded-2xl bg-primary text-primary-foreground"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocusCapture={() => setIsPaused(true)}
+        onBlurCapture={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Cyclenet Supplies highlights"
+      >
+        {/* Slides track */}
+        <div
+          className="flex transition-transform duration-700 ease-out"
+          style={{ transform: `translateX(-${current * 100}%)` }}
+        >
+          {carouselSlides.map((slide, index) => (
+            <div
+              key={slide.title}
+              className="relative w-full flex-shrink-0"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${count}`}
+              aria-hidden={index !== current}
+            >
+              <div className="relative min-h-[26rem] md:min-h-[30rem]">
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  quality={70}
+                  priority={index === 0}
+                  loading={index === 0 ? undefined : 'lazy'}
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                />
+                {/* Legibility gradients matching the site aesthetic */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/30" />
+                <div className="pointer-events-none absolute -top-1/2 left-1/2 h-[200%] w-2/3 -translate-x-1/2 bg-gradient-to-b from-white/10 to-transparent blur-3xl" />
+
+                <div className="relative z-10 flex h-full items-center px-8 py-16 md:px-16 md:py-20">
+                  <div className="max-w-xl">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70 mb-3">
+                      {slide.eyebrow}
+                    </span>
+                    <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 text-balance">
+                      {slide.title}
+                    </h3>
+                    <p className="text-base md:text-lg text-primary-foreground/80 text-balance leading-relaxed mb-8">
+                      {slide.description}
+                    </p>
+                    <Button
+                      size="lg"
+                      variant="secondary"
+                      className="rounded-full px-8"
+                      asChild
+                    >
+                      <a href={slide.cta.href}>{slide.cta.label}</a>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Prev / Next controls */}
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous slide"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/20 text-primary-foreground backdrop-blur-md border border-white/20 hover:bg-background/40 transition-colors"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next slide"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/20 text-primary-foreground backdrop-blur-md border border-white/20 hover:bg-background/40 transition-colors"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+          {carouselSlides.map((slide, index) => (
+            <button
+              key={slide.title}
+              type="button"
+              onClick={() => goTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === current}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === current
+                  ? 'w-8 bg-primary-foreground'
+                  : 'w-2 bg-primary-foreground/40 hover:bg-primary-foreground/60'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </AnimatedSection>
+  )
+}
+
 export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -421,21 +598,14 @@ export default function Page() {
           <div className="space-y-10">
             {productCategories.map((category, index) => (
               <div key={category.title} className="space-y-10">
-                {(index === 6 || index === 12) && (
+                {index === 6 && (
                   <ProductDivider
-                    eyebrow={index === 6 ? 'Everyday Comfort' : 'Brand & Beyond'}
-                    title={
-                      index === 6
-                        ? 'Casual & Professional Attire'
-                        : 'Specialized Uniforms & Branding'
-                    }
-                    subtitle={
-                      index === 6
-                        ? 'Comfortable, stylish pieces designed for the modern workplace and beyond.'
-                        : 'Purpose-built uniforms and custom branding that make your business stand out.'
-                    }
+                    eyebrow="Everyday Comfort"
+                    title="Casual & Professional Attire"
+                    subtitle="Comfortable, stylish pieces designed for the modern workplace and beyond."
                   />
                 )}
+                {index === 12 && <ProductCarousel />}
                 <AnimatedSection>
                   <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
                     <div>
