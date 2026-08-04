@@ -238,6 +238,36 @@ function AnimatedSection({
   )
 }
 
+function ProductDivider({
+  eyebrow,
+  title,
+  subtitle
+}: {
+  eyebrow: string
+  title: string
+  subtitle: string
+}) {
+  return (
+    <AnimatedSection>
+      <div className="relative overflow-hidden rounded-2xl bg-primary text-primary-foreground px-8 py-14 md:px-14 md:py-20 text-center">
+        {/* Soft accent glow to match the site's gradient aesthetic */}
+        <div className="pointer-events-none absolute -top-1/2 left-1/2 h-[200%] w-2/3 -translate-x-1/2 bg-gradient-to-b from-white/10 to-transparent blur-3xl" />
+        <div className="relative z-10 max-w-2xl mx-auto">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70 mb-3">
+            {eyebrow}
+          </span>
+          <h3 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3 text-balance">
+            {title}
+          </h3>
+          <p className="text-base md:text-lg text-primary-foreground/80 text-balance leading-relaxed">
+            {subtitle}
+          </p>
+        </div>
+      </div>
+    </AnimatedSection>
+  )
+}
+
 export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -389,45 +419,62 @@ export default function Page() {
           </AnimatedSection>
 
           <div className="space-y-10">
-            {productCategories.map((category) => (
-              <AnimatedSection key={category.title}>
-                <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
-                      {category.title}
-                    </h3>
-                    <div className="h-0.5 w-12 bg-primary rounded-full" />
+            {productCategories.map((category, index) => (
+              <div key={category.title} className="space-y-10">
+                {(index === 6 || index === 12) && (
+                  <ProductDivider
+                    eyebrow={index === 6 ? 'Everyday Comfort' : 'Brand & Beyond'}
+                    title={
+                      index === 6
+                        ? 'Casual & Professional Attire'
+                        : 'Specialized Uniforms & Branding'
+                    }
+                    subtitle={
+                      index === 6
+                        ? 'Comfortable, stylish pieces designed for the modern workplace and beyond.'
+                        : 'Purpose-built uniforms and custom branding that make your business stand out.'
+                    }
+                  />
+                )}
+                <AnimatedSection>
+                  <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
+                    <div>
+                      <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
+                        {category.title}
+                      </h3>
+                      <div className="h-0.5 w-12 bg-primary rounded-full" />
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      {category.items.map((item) => (
+                        <Card
+                          key={item.name}
+                          className="group bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
+                        >
+                          <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              loading="lazy"
+                              quality={65}
+                              className="object-contain transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
+                            />
+                          </div>
+                          <div className="px-2 py-1 space-y-0.5">
+                            <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
+                              {item.name}
+                            </h4>
+                            <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
+                              {item.description}
+                            </p>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {category.items.map((item) => (
-                      <Card
-                        key={item.name}
-                        className="group bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
-                      >
-                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            loading="lazy"
-                            quality={65}
-                            className="object-contain transition-transform duration-300 group-hover:scale-105"
-                            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
-                          />
-                        </div>
-                        <div className="px-2 py-1 space-y-0.5">
-                          <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
-                            {item.name}
-                          </h4>
-                          <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
-                            {item.description}
-                          </p>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
+                </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>
