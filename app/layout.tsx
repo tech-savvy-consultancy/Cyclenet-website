@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     icon: [
       {
         url: '/logo.png',
-        media: '(prefers-color-scheme: light)',
+        
       },
       {
         url: '/logo.png',
-        media: '(prefers-color-scheme: dark)',
+       
       },
       {
         url: '/logo.png',
