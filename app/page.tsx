@@ -531,7 +531,7 @@ export default function Page() {
             Designed for you.
           </h1>
           <p className="text-xl md:text-2xl text-white/85 mb-12 text-balance leading-relaxed">
-            Custom made clothing and promotional wear, manufactured with precision and delivered with care.
+            Custom made clothing and promotional wear, manufactured with precision and delivered with care. Made for comfort and durability.
           </p>
           <Button
             size="lg"
