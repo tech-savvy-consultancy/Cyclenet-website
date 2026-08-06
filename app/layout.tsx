@@ -10,6 +10,22 @@ export const metadata: Metadata = {
   title: 'Cyclenet Supplies | Custom Made Clothing & Promotional Wear',
   description: 'Leading quality manufacturer of customized uniforms and promotional wear based in Bulawayo. Specialists in protective wear, corporate uniforms, and branded apparel.',
    
+  openGraph: {
+  title: "Cyclenet Supplies | Custom Made Clothing & Promotional Wear",
+  description: "Leading manufacturer of workwear, corporate wear and promotional clothing.",
+  url: "https://cyclenet-website.netlify.app",
+  siteName: "Cyclenet Supplies",
+  images: [
+    {
+      url: "/logo.png",
+      width: 1200,
+      height: 630,
+      alt: "Cyclenet Supplies Logo",
+    },
+  ],
+  locale: "en_US",
+  type: "website",
+}, 
   icons: {
     icon: [
       {
