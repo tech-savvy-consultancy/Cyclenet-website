@@ -142,6 +142,15 @@ const productCategories = [
       { name: 'Banners', description: 'Custom banners and signage', image: '/products/banners.jpg' },
       { name: 'Tear Drop Banner', description: 'Eye-catching tear drop banners', image: '/products/teardrop-banner.jpg' }
     ]
+  },
+  {
+    title: 'Garment Printing Services',
+    items: [
+      { name: 'Screen Printing', description: 'Bold, durable designs for uniforms, workwear, and promotional garments', image: '/printing-screen.png' },
+      { name: 'Direct to Fabric Printing', description: 'Detailed, full-color prints applied directly to textile surfaces', image: '/printing-direct-fabric.png' },
+      { name: 'Sublimation Printing', description: 'Vibrant, fade-resistant prints for sportswear and performance fabrics', image: '/printing-sublimation.png' },
+      { name: 'Embroidery Services', description: 'Premium stitched branding for a refined, professional finish', image: '/printing-embroidery.png' }
+    ]
   }
 ]
 
