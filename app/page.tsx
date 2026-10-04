@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Menu, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Menu, X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react'
 import Image from 'next/image'
 
 const productCategories = [
@@ -453,8 +453,110 @@ function ProductCarousel() {
   )
 }
 
+type ProductItem = {
+  name: string
+  description: string
+  image: string
+}
+
+function ProductModal({
+  product,
+  onClose,
+}: {
+  product: ProductItem | null
+  onClose: () => void
+}) {
+  const [zoom, setZoom] = useState(1)
+
+  useEffect(() => {
+    if (!product) return
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === '+' || event.key === '=') setZoom((value) => Math.min(value + 0.25, 3))
+      if (event.key === '-') setZoom((value) => Math.max(value - 0.25, 1))
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [product, onClose])
+
+  useEffect(() => {
+    if (!product) setZoom(1)
+  }, [product])
+
+  if (!product) return null
+
+  const adjustZoom = (amount: number) => {
+    setZoom((value) => Math.min(Math.max(value + amount, 1), 3))
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="product-modal-title"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose()
+      }}
+    >
+      <div className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-card shadow-2xl">
+        <div className="flex items-center justify-between border-b border-border px-4 py-3 md:px-6">
+          <div>
+            <h2 id="product-modal-title" className="font-semibold text-foreground">{product.name}</h2>
+            <p className="text-xs text-muted-foreground">Click outside or press Escape to close</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close product preview"
+            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="relative min-h-0 flex-1 overflow-auto bg-muted/40">
+          <div className="flex min-h-[50vh] items-center justify-center p-6 md:p-10">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={1200}
+              height={900}
+              quality={85}
+              className="max-h-[62vh] w-auto max-w-full object-contain transition-transform duration-200"
+              style={{ transform: `scale(${zoom})` }}
+              sizes="(max-width: 768px) 92vw, 900px"
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 border-t border-border px-4 py-3 md:px-6">
+          <p className="min-w-0 truncate text-sm text-muted-foreground">{product.description}</p>
+          <div className="flex shrink-0 items-center gap-1">
+            <button type="button" onClick={() => adjustZoom(-0.25)} disabled={zoom <= 1} aria-label="Zoom out" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40">
+              <ZoomOut className="h-4 w-4" />
+            </button>
+            <button type="button" onClick={() => setZoom(1)} aria-label="Reset zoom" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+              <RotateCcw className="h-4 w-4" />
+            </button>
+            <button type="button" onClick={() => adjustZoom(0.25)} disabled={zoom >= 3} aria-label="Zoom in" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40">
+              <ZoomIn className="h-4 w-4" />
+            </button>
+            <span className="ml-1 w-10 text-right text-xs text-muted-foreground">{Math.round(zoom * 100)}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Page() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
@@ -626,7 +728,17 @@ export default function Page() {
                       {category.items.map((item) => (
                         <Card
                           key={item.name}
-                          className="group bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View ${item.name}`}
+                          onClick={() => setSelectedProduct(item)}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault()
+                              setSelectedProduct(item)
+                            }
+                          }}
+                          className="group cursor-zoom-in bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                           <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                             <Image
@@ -748,6 +860,8 @@ export default function Page() {
           </p>
         </div>
       </footer>
+
+      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   )
 }
