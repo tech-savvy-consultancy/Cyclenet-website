@@ -3,149 +3,135 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ChevronDown, Mail, Phone, MapPin } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Menu, X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react'
 import Image from 'next/image'
 
 const productCategories = [
   {
     title: 'Protective Wear',
     items: [
-      { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit.jpg' },
-      { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/acid-proof-worksuit.jpg' },
-      { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/fire-proof-worksuit.jpg' }
-    ]
-  },
-  {
-    title: 'Dust Coats',
-    items: [
-      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat.png' },
-      { name: 'Lab Coat', description: 'Standard and premium lab coats', image: '/products/lab-coat.jpg' }
-    ]
-  },
-  {
-    title: 'Head Gear',
-    items: [
-      { name: 'Helmets', description: 'Safety helmets for construction and industry', image: '/products/helmet.jpg' },
-      { name: 'Baseball Cap', description: 'Custom branded baseball caps', image: '/products/baseball-cap.jpg' },
-      { name: 'Sun Hat', description: 'Protective sun hats', image: '/products/sun-hat.jpg' }
-    ]
-  },
-  {
-    title: 'Protective Gloves',
-    items: [
-      { name: 'Cleaning Gloves', description: 'Durable cleaning gloves', image: '/products/cleaning-gloves.jpg' },
-      { name: 'Sports Gloves', description: 'Athletic and sports gloves', image: '/products/sports-gloves.jpg' },
-      { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction-gloves.jpg' }
-    ]
-  },
-  {
-    title: 'Goggles',
-    items: [
-      { name: 'Welding Goggles', description: 'Professional welding protection', image: '/products/welding-goggles.jpg' },
-      { name: 'UV Goggles', description: 'UV protection goggles', image: '/products/uv-goggles.jpg' },
-      { name: 'Protective Goggles', description: 'General protective eyewear', image: '/products/protective-goggles.jpg' }
-    ]
-  },
-  {
-    title: 'Safety Shoes',
-    items: [
-      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low-cut-safety-shoe.jpg' },
-      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/high-cut-safety-boots.jpg' },
-      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety-shoe.jpg' }
-    ]
-  },
-  {
-    title: 'Ladies Formal Wear',
-    items: [
-      { name: "Women's Formal Suit", description: 'Professional business suits', image: '/products/womens-formal-suit.jpg' },
-      { name: "Women's Formal Pants", description: 'Elegant formal trousers', image: '/products/womens-formal-pants.jpg' },
-      { name: "Women's Wear", description: 'Complete women\'s formal collection', image: '/products/womens-wear.jpg' }
-    ]
-  },
-  {
-    title: 'T-Shirts',
-    items: [
-      { name: 'Round Neck T-Shirt', description: 'Classic round neck design', image: '/products/round-neck-tshirt.jpg' },
-      { name: 'V Neck T-Shirt', description: 'Stylish V-neck t-shirts', image: '/products/v-neck-tshirt.jpg' },
-      { name: 'T-Shirt', description: 'Custom promotional t-shirts', image: '/products/tshirt.jpg' }
-    ]
-  },
-  {
-    title: 'School Wear',
-    items: [
-      { name: "Boys Uniform", description: 'Complete boys school uniforms', image: '/products/boys-uniform.jpg' },
-      { name: "Girl's Uniform", description: 'Complete girls school uniforms', image: '/products/girls-uniform.jpg' },
-      { name: "Tunic & Boys Shorts", description: 'School tunics and shorts', image: '/products/tunic-boys-shorts.jpg' }
+  { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit-removebg-preview.png' },
+  { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Acid-proof_worksuit-removebg-preview.png' },
+  { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Fire-proof_worksuit-removebg-preview.png' }
     ]
   },
   {
     title: 'Reflective Vests & Jackets',
     items: [
-      { name: 'Reflective Half Jacket', description: 'High-visibility half jackets', image: '/products/reflective-half-jacket.jpg' },
-      { name: "Miner's Reflective Jacket", description: 'Mining industry reflective wear', image: '/products/miners-reflective-jacket.jpg' },
-      { name: 'Work Reflective Jacket', description: 'General work reflective jackets', image: '/products/work-reflective-jacket.jpg' }
+      { name: 'Reflective Half Jacket', description: 'High-visibility half jackets', image: '/products/Screenshot_26-7-2026_16581_www.bing.com-removebg-preview.png' },
+      { name: "Miner's Reflective Jacket", description: 'Mining industry reflective wear', image: '/products/Miners_reflective_jacket-removebg-preview.png' },
+      { name: 'Work Reflective Jacket', description: 'General work reflective jackets', image: '/products/work_reflective_jacket-removebg-preview.png' }
     ]
   },
   {
-    title: 'Safari Wear',
+    title: 'Dust Coats',
     items: [
-      { name: 'Safari Shirt', description: 'Classic safari shirts', image: '/products/safari-shirt.jpg' },
-      { name: 'Safari Multi Pocket Half Jacket', description: 'Functional safari jackets', image: '/products/safari-multi-pocket-jacket.jpg' },
-      { name: 'Safari Shorts', description: 'Durable safari shorts', image: '/products/safari-shorts.jpg' }
-    ]
-  },
-  {
-    title: 'Golf T-Shirts',
-    items: [
-      { name: 'Golf T-Shirt', description: 'Classic golf shirts', image: '/products/golf-tshirt.jpg' },
-      { name: 'Slim Fit Golf T-Shirt', description: 'Modern slim-fit golf shirts', image: '/products/slim-fit-golf-tshirt.jpg' }
-    ]
-  },
-  {
-    title: "Chef's Uniform",
-    items: [
-      { name: 'Chefs Top Wear', description: 'Professional chef jackets', image: '/products/chefs-top.jpg' },
-      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron.jpg' },
-      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants.jpg' }
-    ]
-  },
-  {
-    title: 'Gumboots & Rubber Boots',
-    items: [
-      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots.jpg' },
-      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gumboots-low-cut.jpg' }
+      { name: 'Dust Coat', description: 'Professional dust coats for various industries', image: '/products/dust-coat-removebg-preview.png' },
+      { name: 'Lab Coat', description: 'Standard and premium lab coats', image: '/products/lab-coat-removebg-preview.png' }
     ]
   },
   {
     title: 'Formal Wear',
     items: [
-      { name: 'Short Sleeved Shirt', description: 'Formal short-sleeved shirts', image: '/products/short-sleeved-shirt.jpg' },
-      { name: 'Long Sleeve Shirt', description: 'Formal long-sleeved shirts', image: '/products/long-sleeve-shirt.jpg' },
-      { name: 'Ladies Blouse', description: 'Professional ladies blouses', image: '/products/ladies-blouse.jpg' }
+      { name: 'Short Sleeved Shirt', description: 'Formal short-sleeved shirts', image: '/products/short-sleeved-shirt-removebg-preview.png' },
+      { name: 'Long Sleeve Shirt', description: 'Formal long-sleeved shirts', image: '/products/long-sleeve-shirt-removebg-preview.png' },
+      { name: 'Ladies Blouse', description: 'Professional ladies blouses', image: '/products/ladies-blouse-removebg-preview.png' }
     ]
   },
   {
-    title: 'Security Uniform',
+    title: 'Ladies Formal Wear',
     items: [
-      { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts', image: '/products/security-long-sleeved-shirt.jpg' },
-      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants.jpg' },
-      { name: "Security's Jacket", description: 'Security jackets', image: '/products/security-jacket.jpg' }
+      { name: "Women's Formal Suit", description: 'Professional business suits', image: '/products/womens_blazer-removebg-preview.png' },
+      { name: "Women's Formal Pants", description: 'Elegant formal trousers', image: '/products/womens_formal_pants-removebg-preview.png' },
+      { name: "Women's Suit", description: 'Complete women\'s formal collection', image: '/products/ladies_formal_wear-removebg-preview.png' }
     ]
   },
   {
-    title: "Security's Accessories",
+    title: 'T-Shirts',
     items: [
-      { name: 'Hand Cuffs', description: 'Professional handcuffs', image: '/products/handcuffs.jpg' },
-      { name: 'Sun Glasses', description: 'Security sunglasses', image: '/products/sunglasses.jpg' },
-      { name: 'Button Stick', description: 'Security batons', image: '/products/button-stick.jpg' }
+      { name: 'Round Neck T-Shirt', description: 'Classic round neck design', image: '/products/Screenshot_26-7-2026_17236_www.bing.com-removebg-preview.png' },
+      { name: 'V Neck T-Shirt', description: 'Stylish V-neck t-shirts', image: '/products/Screenshot_26-7-2026_172647_www.bing.com-removebg-preview.png' },
+      { name: 'Golf T-Shirt', description: 'Custom promotional t-shirts', image: '/products/golf_shirt-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'School Wear',
+    items: [
+      { name: "Boys Uniform", description: 'Complete boys school uniforms', image: '/products/boys_uniform-removebg-preview.png' },
+      { name: "Girl's Uniform", description: 'Complete girls school uniforms', image: '/products/Girls_uniform-removebg-preview.png' },
+      { name: "Tunic & Boys Shorts", description: 'School tunics and shorts', image: '/products/girls_uniforms-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Golf T-Shirts',
+    items: [
+      { name: 'Golf T-Shirt', description: 'Classic golf shirts', image: '/products/golf-tshirt-removebg-preview.png' },
+      { name: 'Slim Fit Golf T-Shirt', description: 'Modern slim-fit golf shirts', image: '/products/slim-fit-golf-tshirt-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Safari Wear',
+    items: [
+      { name: 'Safari Shirt', description: 'Classic safari shirts', image: '/products/safari-shirt-removebg-preview.png' },
+      { name: 'Safari Multi Pocket Half Jacket', description: 'Functional safari jackets', image: '/products/safari_vest-removebg-preview.png' },
+      { name: 'Safari Shorts', description: 'Durable safari shorts', image: '/products/safari-shorts-removebg-preview.png' }
     ]
   },
   {
     title: 'Hospital Wear',
     items: [
-      { name: "Nurse's Top Wear", description: 'Professional nursing tops', image: '/products/nurses-top.jpg' },
-      { name: "Nurse's Pants", description: 'Comfortable nursing pants', image: '/products/nurses-pants.jpg' },
-      { name: 'Theatre Gown', description: 'Surgical theatre gowns', image: '/products/theatre-gown.jpg' }
+      { name: "Nurse's Top Wear", description: 'Professional nursing tops', image: '/products/Screenshot_26-7-2026_174848_www.bing.com-removebg-preview.png' },
+      { name: "Nurse's Pants", description: 'Comfortable nursing pants', image: '/products/Screenshot_26-7-2026_175219_www.bing.com-removebg-preview.png' },
+      { name: 'Theatre Gown', description: 'Surgical theatre gowns', image: '/products/Screenshot_26-7-2026_175830_www.bing.com-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Security Uniform',
+    items: [
+      { name: "Security's Long Sleeved Shirt", description: 'Professional security shirts', image: '/products/security_shirt-removebg-preview.png' },
+      { name: "Security's Pants", description: 'Durable security pants', image: '/products/security-pants-removebg-preview (1).png' },
+      { name: "Security's Jacket", description: 'Security jackets', image: '/products/sec_jacket-removebg-preview.png' }
+    ]
+  },
+  {
+    title: "Chef's Uniform",
+    items: [
+      { name: 'Chefs Top Wear', description: 'Professional chef jackets', image: '/products/chefs-top-removebg-preview.png' },
+      { name: 'Chefs Apron', description: 'Durable chef aprons', image: '/products/chefs-apron-removebg-preview.png' },
+      { name: 'Chefs Pants', description: 'Comfortable chef pants', image: '/products/chefs-pants-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Safety Shoes',
+    items: [
+      { name: 'Low Cut Safety Shoe', description: 'Comfortable low-cut safety footwear', image: '/products/low_cut_safety_shoes-removebg-preview.png' },
+      { name: 'High Cut Safety Boots', description: 'High-cut protective boots', image: '/products/highcut_safety_boots-removebg-preview.png' },
+      { name: 'Safety Shoe', description: 'Standard safety shoes', image: '/products/safety_boots-removebg-preview.png' }
+    ]
+  },
+
+  {
+    title: 'Gumboots & Rubber Boots',
+    items: [
+      { name: 'Gumboots', description: 'Standard gumboots', image: '/products/gumboots-removebg-preview.png' },
+      { name: 'Gumboots Low Cut', description: 'Low-cut rubber boots', image: '/products/gum_boots_low_cut-removebg-preview.png' }
+    ]
+  },
+
+  {
+    title: 'Protective Gloves',
+    items: [
+      { name: 'Cleaning Gloves', description: 'Durable cleaning gloves', image: '/products/gloves-removebg-preview.png' },
+      { name: 'Sports Gloves', description: 'Athletic and sports gloves', image: '/products/sports_gloves-removebg-preview.png' },
+      { name: 'Construction Gloves', description: 'Heavy-duty construction gloves', image: '/products/construction_gloves-removebg-preview.png' }
+    ]
+  },
+  {
+    title: 'Bedding',
+    items: [
+      { name: 'Duvet covers ', description: 'Plain white, soft and comfortable duvet covers and pillows', image: '/products/decoração de cama de casal.jpg' },
+      { name: 'Patterned Duvet covers', description: 'Sleep comfortably in warmth and soft bedding sheets and duvets', image: '/products/Sleep like royalty, every night, with our….jpg' },
+
     ]
   },
   {
@@ -156,42 +142,91 @@ const productCategories = [
       { name: 'Banners', description: 'Custom banners and signage', image: '/products/banners.jpg' },
       { name: 'Tear Drop Banner', description: 'Eye-catching tear drop banners', image: '/products/teardrop-banner.jpg' }
     ]
+  },
+  {
+    title: 'Garment Printing Services',
+    items: [
+      { name: 'Screen Printing', description: 'Bold, durable designs for uniforms, workwear, and promotional garments', image: '/printing-screen.png' },
+      { name: 'Direct to Fabric Printing', description: 'Detailed, full-color prints applied directly to textile surfaces', image: '/printing-direct-fabric.png' },
+      { name: 'Sublimation Printing', description: 'Vibrant, fade-resistant prints for sportswear and performance fabrics', image: '/printing-sublimation.png' },
+      { name: 'Embroidery Services', description: 'Premium stitched branding for a refined, professional finish', image: '/printing-embroidery.png' }
+    ]
   }
 ]
+
+function HeroVideo() {
+  const [src, setSrc] = useState<string | null>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    // Skip video entirely for reduced-motion users, and serve a light
+    // 360p file to small screens so mobile isn't downloading 2.6MB.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const small = window.matchMedia('(max-width: 768px)').matches
+    setSrc(small ? '/hero-manufacturing-360.mp4' : '/hero-manufacturing.mp4')
+  }, [])
+
+  return (
+    <div className="absolute inset-0" aria-hidden="true">
+      {/* Poster paints immediately so the hero never flashes empty */}
+      <div className="absolute inset-0 bg-[url('/hero-poster.jpg')] bg-cover bg-center" />
+      {src && (
+        <video
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${ready ? 'opacity-100' : 'opacity-0'
+            }`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/hero-poster.jpg"
+          onCanPlay={() => setReady(true)}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      )}
+      {/* Gradient overlay: stronger at the edges to keep text legible */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/55 to-black/80" />
+    </div>
+  )
+}
 
 function useScrollAnimation() {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const node = ref.current
+    if (!node) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
+          // Stop observing once revealed to keep scrolling cheap.
+          observer.disconnect()
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+      { threshold: 0, rootMargin: '200px 0px' }
     )
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
-    }
+    observer.observe(node)
+    return () => observer.disconnect()
   }, [])
 
   return { ref, isVisible }
 }
 
-function AnimatedSection({ 
-  children, 
-  className = '', 
-  delay = 0 
-}: { 
+function AnimatedSection({
+  children,
+  className = '',
+  delay = 0
+}: {
   children: React.ReactNode
   className?: string
   delay?: number
@@ -201,11 +236,10 @@ function AnimatedSection({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-12'
-      } ${className}`}
+      className={`transition-[opacity,transform] duration-500 ease-out will-change-[opacity,transform] ${isVisible
+        ? 'opacity-100 translate-y-0'
+        : 'opacity-0 translate-y-4'
+        } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -213,29 +247,342 @@ function AnimatedSection({
   )
 }
 
-export default function Page() {
-  const [scrollY, setScrollY] = useState(0)
+function ProductDivider({
+  eyebrow,
+  title,
+  subtitle
+}: {
+  eyebrow: string
+  title: string
+  subtitle: string
+}) {
+  return (
+    <AnimatedSection>
+      <div className="relative overflow-hidden rounded-2xl bg-primary text-primary-foreground px-8 py-14 md:px-14 md:py-20 text-center">
+        {/* Soft accent glow to match the site's gradient aesthetic */}
+        <div className="pointer-events-none absolute -top-1/2 left-1/2 h-[200%] w-2/3 -translate-x-1/2 bg-gradient-to-b from-white/10 to-transparent blur-3xl" />
+        <div className="relative z-10 max-w-2xl mx-auto">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70 mb-3">
+            {eyebrow}
+          </span>
+          <h3 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3 text-balance">
+            {title}
+          </h3>
+          <p className="text-base md:text-lg text-primary-foreground/80 text-balance leading-relaxed">
+            {subtitle}
+          </p>
+        </div>
+      </div>
+    </AnimatedSection>
+  )
+}
+
+const carouselSlides = [
+  {
+    eyebrow: 'Our Products',
+    title: 'A Complete Range for Every Industry',
+    description:
+      'From protective workwear to corporate uniforms, we manufacture premium apparel tailored to your exact specifications.',
+    image: '/carousel/IMG-20260416-WA0011.jpg',
+    cta: { label: 'Explore Products', href: '#products' }
+  },
+  {
+    eyebrow: 'Branding Services',
+    title: 'Your Logo, Expertly Applied',
+    description:
+      'Professional embroidery and screen printing that turn everyday garments into a lasting extension of your brand.',
+    image: '/carousel/branding.png',
+    cta: { label: 'Brand With Us', href: '#contact' }
+  },
+  {
+    eyebrow: 'Craftsmanship',
+    title: 'Precision in Every Stitch',
+    description:
+      'Skilled hands and modern machinery combine to deliver garments built for durability, comfort, and a flawless finish.',
+    image: '/carousel/ugandan-crafts-ZWxPGOcUzR4-unsplash.jpg',
+    cta: { label: 'Our Process', href: '#about' }
+  },
+  {
+    eyebrow: 'Real Value',
+    title: 'Unified Teams, Trusted Quality',
+    description:
+      'Dependable delivery and competitive pricing that help businesses of every size look and feel professional.',
+    image: '/carousel/umit-yildirim-9OB46apMbC4-unsplash.jpg',
+    cta: { label: 'Get a Quote', href: '#contact' }
+  }
+]
+
+function ProductCarousel() {
+  const [current, setCurrent] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const touchStartX = useRef<number | null>(null)
+  const count = carouselSlides.length
+
+  const goTo = (index: number) => setCurrent((index + count) % count)
+  const next = () => goTo(current + 1)
+  const prev = () => goTo(current - 1)
+
+  // Autoplay, paused on hover/focus/interaction
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setTimeout(() => {
+      setCurrent((c) => (c + 1) % count)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [current, isPaused, count])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const delta = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) next()
+      else prev()
+    }
+    touchStartX.current = null
+  }
+
+  return (
+    <AnimatedSection>
+      <div
+        className="relative overflow-hidden rounded-2xl bg-primary text-primary-foreground"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocusCapture={() => setIsPaused(true)}
+        onBlurCapture={() => setIsPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Cyclenet Supplies highlights"
+      >
+        {/* Slides track */}
+        <div
+          className="flex transition-transform duration-700 ease-out"
+          style={{ transform: `translateX(-${current * 100}%)` }}
+        >
+          {carouselSlides.map((slide, index) => (
+            <div
+              key={slide.title}
+              className="relative w-full flex-shrink-0"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${count}`}
+              aria-hidden={index !== current}
+            >
+              <div className="relative min-h-[26rem] md:min-h-[30rem]">
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  quality={70}
+                  priority={index === 0}
+                  loading={index === 0 ? undefined : 'lazy'}
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                />
+                {/* Legibility gradients matching the site aesthetic */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/30" />
+                <div className="pointer-events-none absolute -top-1/2 left-1/2 h-[200%] w-2/3 -translate-x-1/2 bg-gradient-to-b from-white/10 to-transparent blur-3xl" />
+
+                <div className="relative z-10 flex h-full items-center px-8 py-16 md:px-16 md:py-20">
+                  <div className="max-w-xl">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70 mb-3">
+                      {slide.eyebrow}
+                    </span>
+                    <h3 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4 text-balance">
+                      {slide.title}
+                    </h3>
+                    <p className="text-base md:text-lg text-primary-foreground/80 text-balance leading-relaxed mb-8">
+                      {slide.description}
+                    </p>
+                    <Button
+                      size="lg"
+                      variant="secondary"
+                      className="rounded-full px-8"
+                      asChild
+                    >
+                      <a href={slide.cta.href}>{slide.cta.label}</a>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Prev / Next controls */}
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous slide"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/20 text-primary-foreground backdrop-blur-md border border-white/20 hover:bg-background/40 transition-colors"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next slide"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-background/20 text-primary-foreground backdrop-blur-md border border-white/20 hover:bg-background/40 transition-colors"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+          {carouselSlides.map((slide, index) => (
+            <button
+              key={slide.title}
+              type="button"
+              onClick={() => goTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === current}
+              className={`h-2 rounded-full transition-all duration-300 ${index === current
+                ? 'w-8 bg-primary-foreground'
+                : 'w-2 bg-primary-foreground/40 hover:bg-primary-foreground/60'
+                }`}
+            />
+          ))}
+        </div>
+      </div>
+    </AnimatedSection>
+  )
+}
+
+type ProductItem = {
+  name: string
+  description: string
+  image: string
+}
+
+function ProductModal({
+  product,
+  onClose,
+}: {
+  product: ProductItem | null
+  onClose: () => void
+}) {
+  const [zoom, setZoom] = useState(1)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
+    if (!product) return
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === '+' || event.key === '=') setZoom((value) => Math.min(value + 0.25, 3))
+      if (event.key === '-') setZoom((value) => Math.max(value - 0.25, 1))
     }
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [product, onClose])
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  useEffect(() => {
+    if (!product) setZoom(1)
+  }, [product])
 
-  const parallaxOffset = scrollY * 0.5
+  if (!product) return null
+
+  const adjustZoom = (amount: number) => {
+    setZoom((value) => Math.min(Math.max(value + amount, 1), 3))
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="product-modal-title"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose()
+      }}
+    >
+      <div className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-card shadow-2xl">
+        <div className="flex items-center justify-between border-b border-border px-4 py-3 md:px-6">
+          <div>
+            <h2 id="product-modal-title" className="font-semibold text-foreground">{product.name}</h2>
+            <p className="text-xs text-muted-foreground">Click outside or press Escape to close</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close product preview"
+            className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="relative min-h-0 flex-1 overflow-auto bg-muted/40">
+          <div className="flex min-h-[50vh] items-center justify-center p-6 md:p-10">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={1200}
+              height={900}
+              quality={85}
+              className="max-h-[62vh] w-auto max-w-full object-contain transition-transform duration-200"
+              style={{ transform: `scale(${zoom})` }}
+              sizes="(max-width: 768px) 92vw, 900px"
+            />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 border-t border-border px-4 py-3 md:px-6">
+          <p className="min-w-0 truncate text-sm text-muted-foreground">{product.description}</p>
+          <div className="flex shrink-0 items-center gap-1">
+            <button type="button" onClick={() => adjustZoom(-0.25)} disabled={zoom <= 1} aria-label="Zoom out" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40">
+              <ZoomOut className="h-4 w-4" />
+            </button>
+            <button type="button" onClick={() => setZoom(1)} aria-label="Reset zoom" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+              <RotateCcw className="h-4 w-4" />
+            </button>
+            <button type="button" onClick={() => adjustZoom(0.25)} disabled={zoom >= 3} aria-label="Zoom in" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40">
+              <ZoomIn className="h-4 w-4" />
+            </button>
+            <span className="ml-1 w-10 text-right text-xs text-muted-foreground">{Math.round(zoom * 100)}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function Page() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-purple-50/20 to-pink-50/30">
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border">
+      <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border">
         <nav className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="text-2xl font-semibold tracking-tight text-foreground">
-            CYCLENET
+          <div className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="Cyclenet Logo"
+              width={36}
+              height={36}
+              priority
+              className="w-9 h-9"
+            />
+            <span className="text-xl font-semibold tracking-tight text-foreground">
+              CYCLENET SUPPLIES
+              <sup className="ml-2 align-super text-xs md:text-sm font-semibold tracking-wide text-foreground relative top-1">
+                Pvt Ltd
+              </sup>
+            </span>
+
           </div>
-          <div className="flex items-center gap-8">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
             <a href="#products" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Products
             </a>
@@ -246,26 +593,60 @@ export default function Page() {
               Contact
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </nav>
+
+        {/* Mobile Navigation */}
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-48' : 'max-h-0'}`}>
+          <div className="px-6 py-4 space-y-3 bg-background/95 border-t border-border">
+            <a
+              href="#products"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Products
+            </a>
+            <a
+              href="#about"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </a>
+            <a
+              href="#contact"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact
+            </a>
+          </div>
+        </div>
       </header>
 
-      {/* Hero Section with Parallax */}
+      {/* Hero Section with Video Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-gradient-to-b from-blue-100/40 via-purple-100/30 to-transparent"
-          style={{ transform: `translateY(${parallaxOffset}px)` }}
-        />
+        <HeroVideo />
         <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-foreground mb-6 text-balance">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight text-white mb-6 text-balance">
             Crafted to perfection.
             <br />
             Designed for you.
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 text-balance leading-relaxed">
-            Custom made clothing and promotional wear, manufactured with precision and delivered with care.
+          <p className="text-xl md:text-2xl text-white/85 mb-12 text-balance leading-relaxed">
+            Custom made clothing and promotional wear, manufactured with precision and delivered with care. Made for comfort and durability.
           </p>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
+            variant="secondary"
             className="rounded-full px-8 h-12 text-base"
             asChild
           >
@@ -273,7 +654,7 @@ export default function Page() {
           </Button>
         </div>
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-6 h-6 text-muted-foreground" />
+          <ChevronDown className="w-6 h-6 text-white/80" />
         </div>
       </section>
 
@@ -325,45 +706,65 @@ export default function Page() {
           </AnimatedSection>
 
           <div className="space-y-10">
-            {productCategories.map((category, categoryIndex) => (
-              <AnimatedSection key={category.title} delay={categoryIndex * 30}>
-                <div className="space-y-3">
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
-                      {category.title}
-                    </h3>
-                    <div className="h-0.5 w-12 bg-primary rounded-full" />
+            {productCategories.map((category, index) => (
+              <div key={category.title} className="space-y-10">
+                {index === 6 && (
+                  <ProductDivider
+                    eyebrow="Everyday Comfort"
+                    title="Casual & Professional Attire"
+                    subtitle="Comfortable, stylish pieces designed for the modern workplace and beyond."
+                  />
+                )}
+                {index === 12 && <ProductCarousel />}
+                <AnimatedSection>
+                  <div className="space-y-3 [content-visibility:auto] [contain-intrinsic-size:auto_320px]">
+                    <div>
+                      <h3 className="text-xl font-semibold tracking-tight text-foreground mb-1">
+                        {category.title}
+                      </h3>
+                      <div className="h-0.5 w-12 bg-primary rounded-full" />
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      {category.items.map((item) => (
+                        <Card
+                          key={item.name}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View ${item.name}`}
+                          onClick={() => setSelectedProduct(item)}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                              event.preventDefault()
+                              setSelectedProduct(item)
+                            }
+                          }}
+                          className="group cursor-zoom-in bg-card border-border hover:shadow-md transition-shadow duration-200 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
+                          <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              loading="lazy"
+                              quality={65}
+                              className="object-contain transition-transform duration-300 group-hover:scale-105"
+                              sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 400px"
+                            />
+                          </div>
+                          <div className="px-2 py-1 space-y-0.5">
+                            <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
+                              {item.name}
+                            </h4>
+                            <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
+                              {item.description}
+                            </p>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {category.items.map((item, itemIndex) => (
-                      <Card
-                        key={item.name}
-                        className="group bg-card border-border hover:shadow-md hover:scale-[1.02] transition-all duration-300 overflow-hidden"
-                        style={{ transitionDelay: `${itemIndex * 30}ms` }}
-                      >
-                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            loading="lazy"
-                            className="object-cover group-hover:scale-110 transition-transform duration-500"
-                            sizes="(max-width: 768px) 50vw, 33vw"
-                          />
-                        </div>
-                        <div className="px-2 py-1 space-y-0.5">
-                          <h4 className="text-xs font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1 leading-tight">
-                            {item.name}
-                          </h4>
-                          <p className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
-                            {item.description}
-                          </p>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
+                </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>
@@ -380,8 +781,8 @@ export default function Page() {
               <p className="text-base mb-6 opacity-90 text-balance leading-relaxed">
                 Get in touch with our team to discuss your custom uniform and promotional wear needs.
               </p>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="secondary"
                 className="rounded-full px-8 h-11 text-sm"
                 asChild
@@ -459,6 +860,8 @@ export default function Page() {
           </p>
         </div>
       </footer>
+
+      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   )
 }

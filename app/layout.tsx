@@ -9,23 +9,39 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: 'Cyclenet Supplies | Custom Made Clothing & Promotional Wear',
   description: 'Leading quality manufacturer of customized uniforms and promotional wear based in Bulawayo. Specialists in protective wear, corporate uniforms, and branded apparel.',
-  generator: 'v0.app',
+   
+  openGraph: {
+  title: "Cyclenet Supplies | Custom Made Clothing & Promotional Wear",
+  description: "Leading manufacturer of workwear, corporate wear and promotional clothing.",
+  url: "https://cyclenet-website.netlify.app",
+  siteName: "Cyclenet Supplies",
+  images: [
+    {
+      url: "/logo.png",
+      width: 1200,
+      height: 630,
+      alt: "Cyclenet Supplies Logo",
+    },
+  ],
+  locale: "en_US",
+  type: "website",
+}, 
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
+        url: '/logo.png',
+        
       },
       {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
+        url: '/logo.png',
+       
       },
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/logo.png',
+        type: 'image/png',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/logo.png',
   },
 }
 

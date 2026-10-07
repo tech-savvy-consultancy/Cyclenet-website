@@ -119,7 +119,29 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchor targets so the fixed header never covers headings */
+    scroll-padding-top: 4rem;
+  }
   body {
     @apply bg-background text-foreground;
+    /* Avoid layout shift when scrollbars appear/disappear */
+    scrollbar-gutter: stable;
+  }
+  img,
+  video {
+    content-visibility: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
