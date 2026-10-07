@@ -10,9 +10,9 @@ const productCategories = [
   {
     title: 'Protective Wear',
     items: [
-      { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit-removebg-preview.png' },
-      { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Acid-proof_worksuit-removebg-preview.png' },
-      { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Fire-proof_worksuit-removebg-preview.png' }
+  { name: 'Ordinary Worksuit', description: 'All sizes and colors available', image: '/products/ordinary-worksuit-removebg-preview.png' },
+  { name: 'Acid-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Acid-proof_worksuit-removebg-preview.png' },
+  { name: 'Fire-Proof Worksuit', description: 'All sizes and colors available', image: '/products/Fire-proof_worksuit-removebg-preview.png' }
     ]
   },
   {
